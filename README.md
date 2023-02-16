@@ -13,6 +13,9 @@ A ideia desse repositório é dividirmos as aulas em branches para termos uma pr
 - Em `File > Settings (se for macOS,  Android Studio > Preferences) > Build, Execution, Deployment > Build Tools > Gradle` e na versão da JDK selecione `Use Embedded JDK`)
 - Sincronize as dependências clicando no ícone do gradle na parte superiro à direita (elefantinho com seta azul)
 
+### Divisão das branches
+O projeto é <b>NOSSO</b>, então fique à vontade para subir alterações. Basta criar uma branch no padrão de gitflow (`feature`, `bugfix`, `refactor`). As branches com nome reservado `feature/aula-<numero_da_aula>` terá todos os avanços do nosso projeto. Por exemplo: Na branch `feature/aula-2` terá tudo o que tem na branch `feature/aula-1` mais o que criaremos na aula 2. Na `feature/aula-3` terá tudo o que tem na `1` e `2` e assim por diante.
+
 ### Contribuidores
 
  - @francineeliza
