@@ -20,3 +20,4 @@ O projeto é <b>NOSSO</b>, então fique à vontade para subir alterações. Bast
 
  - @francineeliza
  - @paulohssouza
+ - @Araujo-Raiara
