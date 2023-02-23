@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="12dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="9dp">
+
+    <TextView
+        android:id="@+id/textGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textAppTitle"
+        android:text="Olá,"
+        android:textColor="#AAAAAA"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textGreeting"
+        android:textColor="#1E1E1E"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="@string/app_name"
+        android:textColor="#000000"
+        android:textSize="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/textAppTitle"
+        android:layout_alignBottom="@id/textName"
+        android:text="\@victorprof"
+        android:textColor="#1E1E1E"
+        android:textSize="8dp"
+        android:textStyle="bold" />
+</RelativeLayout>
