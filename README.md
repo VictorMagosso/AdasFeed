@@ -19,5 +19,5 @@ O projeto é <b>NOSSO</b>, então fique à vontade para subir alterações. Bast
 ### Contribuidores
 
  - @francineeliza
+ - @paulohssouza
  - @Araujo-Raiara
-
