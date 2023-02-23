@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imagePaisagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/paisagem_post" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:text="Paisagem muito bonita"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagePaisagem"
+        android:layout_marginHorizontal="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Paisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonita" />
+
+    <Button
+        android:id="@+id/buttonVerMais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDescricao"
+        android:layout_alignEnd="@+id/textDescricao"
+        android:text="Ver mais" />
+
+    <Button
+        android:id="@+id/buttonVerMenos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDescricao"
+        android:layout_alignStart="@+id/textDescricao"
+        android:text="Ver menos" />
+</RelativeLayout>
