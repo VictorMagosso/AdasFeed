@@ -23,3 +23,4 @@ O projeto é <b>NOSSO</b>, então fique à vontade para subir alterações. Bast
  - @Araujo-Raiara
  - @rafael-rosa1
  - @udimile
+ - @GabrielTamura97
