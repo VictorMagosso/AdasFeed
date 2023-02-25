@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="12dp"
-    android:paddingTop="4dp"
-    android:paddingEnd="9dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textGreeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textAppTitle"
-        android:text="Olá,"
-        android:textColor="#AAAAAA"
-        android:textSize="12sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="9dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textGreeting"
-        android:textColor="#1E1E1E"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        <include layout="@layout/header_user_info_view" />
 
-    <TextView
-        android:id="@+id/textAppTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="@string/app_name"
-        android:textColor="#000000"
-        android:textSize="27dp" />
+        <TextView
+            android:id="@+id/textAppTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/app_name"
+            android:textColor="#000000"
+            android:textSize="27dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutButtons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/textAppTitle"
-        android:layout_alignBottom="@id/textName"
-        android:text="\@victorprof"
-        android:textColor="#1E1E1E"
-        android:textSize="8dp"
-        android:textStyle="bold" />
-</RelativeLayout>
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonNewPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Novo post" />
+
+        <Button
+            android:id="@+id/buttonGoToProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ir para o meu perfil" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
