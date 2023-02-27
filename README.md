@@ -26,3 +26,4 @@ O projeto é <b>NOSSO</b>, então fique à vontade para subir alterações. Bast
  - @GabrielTamura97
  - @laura-lannab
  - @on-ferreira
+ - @eduardo-assimo
