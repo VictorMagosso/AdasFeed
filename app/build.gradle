@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    def circleImageViewVersion ="3.1.0"
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'
