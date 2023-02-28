@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageUser"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/imageUser"
+        app:layout_constraintTop_toTopOf="@+id/imageUser"
+        tools:text="Victor" />
+
+    <TextView
+        android:id="@+id/textTimeInMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/textUserName"
+        app:layout_constraintTop_toBottomOf="@+id/textUserName"
+        tools:text="20 m" />
+
+    <ImageView
+        android:id="@+id/imagePost"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toEndOf="@+id/textUserName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

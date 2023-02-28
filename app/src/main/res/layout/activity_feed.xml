@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -16,8 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/header_user_info_view" />
-
         <TextView
             android:id="@+id/textAppTitle"
             android:layout_width="wrap_content"
@@ -26,6 +26,28 @@
             android:text="@string/app_name"
             android:textColor="#000000"
             android:textSize="27dp" />
+
+        <include
+            android:id="@+id/headerView"
+            layout="@layout/header_user_info_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvStories"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_below="@+id/headerView"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/stories_item"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPosts"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_below="@+id/rvStories"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 
@@ -47,10 +69,10 @@
             android:text="Novo post" />
 
         <Button
-            android:id="@+id/buttonGoToProfile"
+            android:id="@+id/buttonRenderNewList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ir para o meu perfil" />
+            android:text="Carregar nova lista" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

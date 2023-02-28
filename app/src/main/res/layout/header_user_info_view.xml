@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textAppTitle"
             android:text="Olá,"
-            android:textColor="#AAAAAA"
+            android:textColor="#1a1a1a"
             android:textSize="12sp" />
 
         <TextView
