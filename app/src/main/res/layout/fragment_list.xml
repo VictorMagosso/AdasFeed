@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentList"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context=".ListFragment">
+
+    <TextView
+        android:id="@+id/textViewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:textColor="#000"
+        android:text="texto 1" />
+
+    <TextView
+        android:id="@+id/textViewFragment2"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="texto 2" />
+
+    <TextView
+        android:id="@+id/textViewFragment3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:padding="20dp"
+        android:text="texto 2" />
+
+</LinearLayout>

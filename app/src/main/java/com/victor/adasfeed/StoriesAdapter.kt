@@ -1,5 +1,6 @@
 package com.victor.adasfeed
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class StoriesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoriesViewHolder {
         val storiesItemView = LayoutInflater.from(parent.context).inflate(R.layout.stories_item, parent, false)
+        Log.d("contexto no StoriesAdapter", parent.context.applicationContext.toString())
         return StoriesViewHolder(view = storiesItemView)
     }
 
