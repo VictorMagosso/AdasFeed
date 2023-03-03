@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingStart="12dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="9dp"
         app:layout_constraintBottom_toTopOf="@id/linearLayoutButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,25 +26,30 @@
 
         <include
             android:id="@+id/headerView"
-            layout="@layout/header_user_info_view" />
+            layout="@layout/header_user_info_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textAppTitle"
+            android:layout_marginHorizontal="12dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvStories"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_below="@+id/headerView"
             android:layout_width="match_parent"
-            tools:listitem="@layout/stories_item"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headerView"
             android:orientation="horizontal"
-            android:layout_height="wrap_content"/>
+            android:layout_marginTop="18dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/stories_item" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/rvStories"
             android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="wrap_content"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </RelativeLayout>
 
