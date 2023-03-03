@@ -1,5 +1,6 @@
 package com.victor.adasfeed
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class StoriesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoriesViewHolder {
         val storiesItemView = LayoutInflater.from(parent.context).inflate(R.layout.stories_item, parent, false)
+        Log.d("contexto no StoriesAdapter", parent.context.applicationContext.toString())
         return StoriesViewHolder(view = storiesItemView)
     }
 
@@ -58,12 +60,22 @@ data class Stories(
 private fun mockList() = listOf(Stories(
     "Joao",
     "15 m",
-    imageUser = R.drawable.universe_image,
-    imagePost = R.drawable.universe_image,
+    imageUser = R.drawable.user1,
+    imagePost = R.drawable.stories1,
 ),
     Stories(
         "Victor",
         "28 m",
-        imageUser = R.drawable.paisagem_post,
-        imagePost = R.drawable.paisagem_post,
+        imageUser = R.drawable.user2,
+        imagePost = R.drawable.stories2,
+    ), Stories(
+        "Marina da Silva Costa",
+        "59 m",
+        imageUser = R.drawable.user3,
+        imagePost = R.drawable.stories3,
+    ), Stories(
+        "Ninja desconhecido",
+        "60 m",
+        imageUser = R.drawable.user4,
+        imagePost = R.drawable.stories4,
     ))
