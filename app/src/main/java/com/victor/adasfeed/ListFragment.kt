@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var text: TextView
-    val x = Log.d("contexto no onAttach()", requireContext().toString())
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

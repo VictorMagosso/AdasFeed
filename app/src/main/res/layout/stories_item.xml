@@ -1,41 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="150dp"
+    android:padding="12dp"
+    android:layout_height="180dp"
+    android:elevation="0dp"
+    android:layout_marginHorizontal="12dp"
+    app:cardCornerRadius="12dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageUser"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/imageUser"
-        app:layout_constraintTop_toTopOf="@+id/imageUser"
-        tools:text="Victor" />
 
-    <TextView
-        android:id="@+id/textTimeInMinutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/textUserName"
-        app:layout_constraintTop_toBottomOf="@+id/textUserName"
-        tools:text="20 m" />
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imagePost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/placeholder" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imagePost"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintStart_toEndOf="@+id/textUserName"
-        app:layout_constraintTop_toTopOf="parent" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageUser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/user2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imageUser"
+            android:maxLines="1"
+            android:textSize="12dp"
+            android:layout_marginEnd="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:ellipsize="end"
+            android:layout_alignTop="@id/imageUser"
+            tools:text="Victor Magosso teste" />
+
+        <TextView
+            android:layout_below="@id/textUserName"
+            android:layout_alignStart="@id/textUserName"
+            android:textSize="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:id="@+id/textTimeInMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="20 m" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
