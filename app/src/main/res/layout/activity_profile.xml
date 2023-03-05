@@ -56,12 +56,18 @@
         app:layout_constraintStart_toStartOf="@+id/textUserName"
         app:layout_constraintTop_toBottomOf="@+id/textUserName" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:padding="10dp"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/ic_tel"
         android:text="Entrar em contato"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/ripple_button_bg_entrar_em_contato"
         app:layout_constraintEnd_toEndOf="@+id/textNickname"
         app:layout_constraintStart_toStartOf="@+id/textNickname"
         app:layout_constraintTop_toBottomOf="@+id/textNickname" />
@@ -81,6 +87,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
+        android:padding="15dp"
+        android:background="@drawable/bg_input_layout_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textUserNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/textUserNameLabel" />
@@ -98,18 +106,27 @@
         android:id="@+id/editNickaname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="@drawable/bg_input_layout_profile"
         app:layout_constraintEnd_toEndOf="@+id/editUserName"
         app:layout_constraintStart_toStartOf="@+id/editUserName"
         app:layout_constraintTop_toBottomOf="@+id/textNicknameLabel" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReturnToFeed"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:paddingVertical="18dp"
         android:text="Voltar para o feed"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textColor="#737373"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editNickaname" />
+        app:layout_constraintStart_toStartOf="@+id/editNickaname"
+        android:background="@drawable/ripple_button_bg_standard"
+        android:textAllCaps="false"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSaveProfile"
