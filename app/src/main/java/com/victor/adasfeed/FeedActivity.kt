@@ -10,14 +10,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.adasfeed.FakePosts.makePostList
+import com.victor.adasfeed.passandodados.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+const val EXTRA_KEY = "EXTRA_KEY"
+
 class FeedActivity : AppCompatActivity() {
     private lateinit var buttonNewPost: Button
     private lateinit var buttonRenderNewList: Button
+    private lateinit var buttonGoToProfile: Button
     private lateinit var rvStories: RecyclerView
     private lateinit var rvPosts: RecyclerView
     private lateinit var postAdapter: PostAdapter
@@ -29,12 +33,25 @@ class FeedActivity : AppCompatActivity() {
         Log.d("ciclo de vida", "onCreate")
         Log.d("contexto no onCreate", applicationContext.toString())
         setContentView(R.layout.activity_feed)
+
+        val user = User(
+            userName = "Andrey Freitas",
+            userNickname = "@andreyfreitas",
+            imageUser = R.drawable.user1,
+            tel = "+55 (11) 123456789"
+        )
+
+        val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
+            putExtra(EXTRA_KEY, user)
+        }
+
         // inicializa views (findViewById())
         initViews()
         // monta os recyclerViews
         setupRecyclerViews()
-        // criar os listeners de click
+        // criar os listeners
         setupClickListeners()
+        setupNavigationListeners(intent)
 
         CoroutineScope(Dispatchers.Main).launch {
             renderButtonText()
@@ -64,7 +81,8 @@ class FeedActivity : AppCompatActivity() {
         rvStories = findViewById(R.id.rvStories)
         rvPosts = findViewById(R.id.rvPosts)
         buttonNewPost = findViewById(R.id.buttonNewPost)
-        buttonRenderNewList = findViewById(R.id.buttonRenderNewList)
+//        buttonRenderNewList = findViewById(R.id.buttonRenderNewList)
+        buttonGoToProfile = findViewById(R.id.buttonGoToProfile)
         headerView = findViewById(R.id.headerView)
     }
 
@@ -87,11 +105,10 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        buttonRenderNewList.setOnClickListener {
-            val newPostList = makePostList()
-            postAdapter.setNewList(newPostList)
-        }
-
+//        buttonRenderNewList.setOnClickListener {
+//            val newPostList = makePostList()
+//            postAdapter.setNewList(newPostList)
+//        }
         buttonNewPost.setOnClickListener {
             postAdapter.addNewPost(
                 Post(
@@ -105,6 +122,12 @@ class FeedActivity : AppCompatActivity() {
 
         headerView.setOnClickListener {
             startActivity(Intent(applicationContext, ProfileActivity::class.java))
+        }
+    }
+
+    private fun setupNavigationListeners(intent: Intent) {
+        buttonGoToProfile.setOnClickListener {
+            startActivity(intent)
         }
     }
 

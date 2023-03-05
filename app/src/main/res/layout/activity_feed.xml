@@ -22,7 +22,7 @@
             android:layout_alignParentEnd="true"
             android:text="@string/app_name"
             android:textColor="#000000"
-            android:textSize="27dp" />
+            android:textSize="27sp" />
 
         <include
             android:id="@+id/headerView"
@@ -37,8 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/headerView"
-            android:orientation="horizontal"
             android:layout_marginTop="18dp"
+            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/stories_item" />
 
@@ -71,10 +71,16 @@
             android:text="Novo post" />
 
         <Button
-            android:id="@+id/buttonRenderNewList"
+            android:id="@+id/buttonGoToProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Carregar nova lista" />
+            android:text="Ir para tela de perfil" />
+
+<!--        <Button-->
+<!--            android:id="@+id/buttonRenderNewList"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Carregar nova lista" />-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
