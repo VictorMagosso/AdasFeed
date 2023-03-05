@@ -7,11 +7,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.victor.adasfeed.passandodados.User
 
 class ProfileActivity : AppCompatActivity() {
@@ -22,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var textNickname: TextView
     private lateinit var buttonCall: Button
     private lateinit var btnReturnToFeed: Button
+    private lateinit var fabSaveButton: FloatingActionButton
     private var userProfile: User? = null
     private lateinit var imageUser: ImageView
     private lateinit var etUsername: EditText
@@ -40,6 +44,7 @@ class ProfileActivity : AppCompatActivity() {
         imageUser = findViewById(R.id.imageUser)
         etUsername = findViewById(R.id.editUserName)
         etNickname = findViewById(R.id.editNickaname)
+        fabSaveButton = findViewById(R.id.fabSaveProfile)
 
         val extras = intent.extras
         var uri = Uri.parse("")
@@ -91,6 +96,10 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        fabSaveButton.setOnClickListener {
+            saveDataUserProfile(it)
+        }
+
         etUsername.addTextChangedListener { editable ->
             textUserName.text = editable.toString()
         }
@@ -104,6 +113,33 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveDataUserProfile(view: View) {
+        if (isValidForms()){
+            updateProfile()
+            showSnackbarWithText("Perfil atualizado",view)
+        } else {
+            showSnackbarWithText("Username ou nickname não podem estar vazios",view)
+        }
+    }
+
+    private fun showSnackbarWithText(text: String,view: View) {
+        val snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+        snackbar.setAnchorView(R.id.buttonReturnToFeed)
+        snackbar.show()
+    }
+
+    private fun isValidForms(): Boolean = when{
+        etUsername.text.toString().isNotBlank() -> true
+        etNickname.text.toString().isNotBlank() -> true
+        else -> false
+    }
+
+    private fun updateProfile() {
+        val username = etUsername.text.toString()
+        val nickname = etNickname.text.toString()
+        userProfile = userProfile?.copy(userName = username, userNickname =  nickname)
+    }
+
     override fun onStart() {
         super.onStart()
         Log.d("ciclo de vida PA", "onStart")
@@ -112,5 +148,12 @@ class ProfileActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("ciclo de vida PA", "onResume")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (userProfile!=null){
+            userProfile=null
+        }
     }
 }
