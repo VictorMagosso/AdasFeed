@@ -41,7 +41,7 @@ um item. Ele terá 5 segundos para toamr essa decisão. Caso contrário, siga co
 
 - Adicionar o estado completo de “Like” e adicionar em uma lista (List<LikedPost>). Apenas para check,
 deverá ser exibido um Toast com os itens que estão nessa lista sempre que o usuário clicar
-no ícone de coração
+no ícone de coração<br>
 <img src="https://user-images.githubusercontent.com/62938087/222975406-9fa486d7-79bb-4d18-b533-32ab09dffd16.png" width="415"/><br>
 ### Contribuidores
 
