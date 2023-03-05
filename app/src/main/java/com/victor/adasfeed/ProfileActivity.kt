@@ -105,10 +105,8 @@ class ProfileActivity : AppCompatActivity() {
         }
         etNickname.addTextChangedListener { editable ->
             textNickname.text =
-                if (editable.toString().isNotBlank()) {
+                editable.toString().ifBlank {
                     "@${editable.toString()}"
-                } else {
-                    "----"
                 }
         }
     }

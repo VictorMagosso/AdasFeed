@@ -46,7 +46,8 @@ class FeedActivity : AppCompatActivity() {
                 }
                 user?.let { newUser ->
                     tvUsername.text = newUser.userName
-                    tvNickname.text = newUser.userNickname
+                    val textNickName = newUser.userNickname
+                    tvNickname.text = textNickName
                 }
             }
         }
