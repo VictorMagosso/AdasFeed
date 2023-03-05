@@ -1,5 +1,6 @@
 package com.victor.adasfeed
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -20,6 +21,8 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var textUserName: TextView
     private lateinit var textNickname: TextView
     private lateinit var buttonCall: Button
+    private lateinit var btnReturnToFeed: Button
+    private var userProfile: User? = null
     private lateinit var imageUser: ImageView
     private lateinit var etUsername: EditText
     private lateinit var etNickname: EditText
@@ -33,6 +36,7 @@ class ProfileActivity : AppCompatActivity() {
         textUserName = findViewById(R.id.textUserName)
         textNickname = findViewById(R.id.textNickname)
         buttonCall = findViewById(R.id.buttonContact)
+        btnReturnToFeed = findViewById(R.id.buttonReturnToFeed)
         imageUser = findViewById(R.id.imageUser)
         etUsername = findViewById(R.id.editUserName)
         etNickname = findViewById(R.id.editNickaname)
@@ -58,14 +62,17 @@ class ProfileActivity : AppCompatActivity() {
             user?.let { safeUser ->
                 val userName = safeUser.userName
                 val userNickname = safeUser.userNickname
-
+                val imageUser1 = safeUser.imageUser
+                val tel = safeUser.tel
+                userProfile = User(userName, userNickname,imageUser1,tel)
                 textUserName.text = userName
                 textNickname.text = userNickname
-                imageUser.setImageResource(safeUser.imageUser)
+                imageUser.setImageResource(imageUser1)
                 etUsername.setText(userName)
                 etNickname.setText(userNickname)
-                uri1 = safeUser.tel?.let {
-                    Uri.parse("tel:${safeUser.tel}")
+
+                uri1 = tel?.let {
+                    Uri.parse("tel:$tel")
                 } ?: Uri.parse("tel:")
             }
         }
@@ -76,6 +83,12 @@ class ProfileActivity : AppCompatActivity() {
         buttonCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
+        }
+
+        btnReturnToFeed.setOnClickListener {
+            val result = Intent().putExtra("Updated user", userProfile)
+            setResult(Activity.RESULT_OK, result)
+            finish()
         }
 
         etUsername.addTextChangedListener { editable ->
