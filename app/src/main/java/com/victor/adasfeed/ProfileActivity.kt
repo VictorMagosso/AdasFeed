@@ -7,9 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import androidx.core.widget.addTextChangedListener
 import com.victor.adasfeed.passandodados.User
 
 class ProfileActivity : AppCompatActivity() {
@@ -20,6 +21,8 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var textNickname: TextView
     private lateinit var buttonCall: Button
     private lateinit var imageUser: ImageView
+    private lateinit var etUsername: EditText
+    private lateinit var etNickname: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +34,20 @@ class ProfileActivity : AppCompatActivity() {
         textNickname = findViewById(R.id.textNickname)
         buttonCall = findViewById(R.id.buttonContact)
         imageUser = findViewById(R.id.imageUser)
+        etUsername = findViewById(R.id.editUserName)
+        etNickname = findViewById(R.id.editNickaname)
 
         val extras = intent.extras
         var uri = Uri.parse("")
 
         // envia por intents - putExtra
         // recebe por Bundle
+        uri = setupDataUser(extras, uri)
+        setListeners(uri)
+    }
+
+    private fun setupDataUser(extras: Bundle?, uri: Uri?): Uri? {
+        var uri1 = uri
         extras?.let { bundle ->
             val user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 bundle.getParcelable(EXTRA_KEY, User::class.java)
@@ -45,18 +56,38 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             user?.let { safeUser ->
-                textUserName.text = safeUser.userName
-                textNickname.text = safeUser.userNickname
+                val userName = safeUser.userName
+                val userNickname = safeUser.userNickname
+
+                textUserName.text = userName
+                textNickname.text = userNickname
                 imageUser.setImageResource(safeUser.imageUser)
-                uri = safeUser.tel?.let {
+                etUsername.setText(userName)
+                etNickname.setText(userNickname)
+                uri1 = safeUser.tel?.let {
                     Uri.parse("tel:${safeUser.tel}")
                 } ?: Uri.parse("tel:")
             }
         }
+        return uri1
+    }
 
+    private fun setListeners(uri: Uri?) {
         buttonCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
+        }
+
+        etUsername.addTextChangedListener { editable ->
+            textUserName.text = editable.toString()
+        }
+        etNickname.addTextChangedListener { editable ->
+            textNickname.text =
+                if (editable.toString().isNotBlank()) {
+                    "@${editable.toString()}"
+                } else {
+                    "----"
+                }
         }
     }
 
