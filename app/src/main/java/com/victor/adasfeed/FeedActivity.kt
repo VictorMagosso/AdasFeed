@@ -1,15 +1,18 @@
 package com.victor.adasfeed
 
+import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.victor.adasfeed.FakePosts.makePostList
 import com.victor.adasfeed.passandodados.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +30,26 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var headerView: View
+    private lateinit var tvUsername : TextView
+    private lateinit var tvNickname : TextView
+
+    private val registerActivityResult  =
+        prepareResultProfileActivity()
+
+    private fun prepareResultProfileActivity() =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra("Updated user", User::class.java)
+                } else {
+                    result.data?.getParcelableExtra("Updated user")
+                }
+                user?.let { newUser ->
+                    tvUsername.text = newUser.userName
+                    tvNickname.text = newUser.userNickname
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +101,8 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        tvUsername = findViewById(R.id.textName)
+        tvNickname = findViewById(R.id.textNickname)
         rvStories = findViewById(R.id.rvStories)
         rvPosts = findViewById(R.id.rvPosts)
         buttonNewPost = findViewById(R.id.buttonNewPost)
@@ -127,7 +152,9 @@ class FeedActivity : AppCompatActivity() {
 
     private fun setupNavigationListeners(intent: Intent) {
         buttonGoToProfile.setOnClickListener {
-            startActivity(intent)
+            /*startActivity(intent)*/
+//            Launch activity for result
+            registerActivityResult.launch(intent)
         }
     }
 
