@@ -27,7 +27,7 @@
         android:maxLines="2"
         android:text="Paisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagemPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonitaPaisagem muito bonita" />
 
-    <Button
+    androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonVerMais"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:layout_alignEnd="@+id/textDescricao"
         android:text="Ver mais" />
 
-    <Button
+    androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonVerMenos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

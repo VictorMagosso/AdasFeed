@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/inter"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="800"
+        android:font="@font/inter_bold"/>
+
+<!--    <font-->
+<!--        android:fontStyle="italic"-->
+<!--        android:fontWeight="800"-->
+<!--        android:font="@font/inter_italic"/>-->
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        android:font="@font/inter_thin"/>
+
+</font-family>

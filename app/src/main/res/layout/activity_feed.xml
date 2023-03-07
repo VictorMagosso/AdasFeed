@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,12 +15,11 @@
 
         <TextView
             android:id="@+id/textAppTitle"
+            style="@style/ToolbarAppTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/app_name"
-            android:textColor="#000000"
-            android:textSize="27sp" />
+            android:text="@string/app_name" />
 
         <include
             android:id="@+id/headerView"
@@ -30,14 +27,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textAppTitle"
-            android:layout_marginHorizontal="12dp" />
+            android:layout_marginHorizontal="@dimen/feed_margin_default" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvStories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/headerView"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/feed_stories_margin_top"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/stories_item" />
@@ -47,9 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rvStories"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/feed_post_margin_top"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:layout="@layout/post_item" />
 
     </RelativeLayout>
 
@@ -61,26 +59,29 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonNewPost"
-            android:layout_width="wrap_content"
+            style="@style/DefaultActionButton"
+            android:layout_width="@dimen/feed_default_button_width"
             android:layout_height="wrap_content"
-            android:text="Novo post" />
+            android:layout_marginEnd="@dimen/space_8dp"
+            android:text="@string/new_post_label" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonGoToProfile"
+            style="@style/DefaultActionButton"
             android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/space_8dp"
             android:layout_height="wrap_content"
-            android:text="Ir para tela de perfil" />
+            android:text="@string/go_to_profile_label" />
 
-<!--        <Button-->
-<!--            android:id="@+id/buttonRenderNewList"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Carregar nova lista" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/buttonRenderNewList"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Carregar nova lista" />-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

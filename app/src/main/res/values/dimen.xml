@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_text_size">29sp</dimen>
+    <dimen name="text_defaultH1">28sp</dimen>
+    <dimen name="text_defaultH2">24sp</dimen>
+    <dimen name="text_defaultH3">20sp</dimen>
+
+    <!-- definido por design -->
+    <dimen name="paragraph_textH1">20sp</dimen>
+    <dimen name="paragraph_text01">14sp</dimen>
+    <dimen name="paragraph_text02">16sp</dimen>
+    <dimen name="subtitle_text01">10sp</dimen>
+    <dimen name="subtitle_text02">12sp</dimen>
+
+    <!-- minha feature especifica -->
+    <dimen name="my_feature_text">11sp</dimen>
+
+    <!-- Design cria os padrões, como abaixo-->
+    <dimen name="space_2dp">2.00dp</dimen>
+    <dimen name="space_4dp">4.00dp</dimen>
+    <dimen name="space_8dp">8.00dp</dimen>
+    <dimen name="space_12dp">12.00dp</dimen>
+    <dimen name="space_18dp">18.00dp</dimen>
+    <dimen name="space_145dp">145.00dp</dimen>
+
+    <!-- Um padrao -->
+    <dimen name="space_level1">2.00dp</dimen>
+    <dimen name="space_level2">4.00dp</dimen>
+    <dimen name="space_level3">8.00dp</dimen>
+    <dimen name="space_level4">12.00dp</dimen>
+    <dimen name="space_level5">18.00dp</dimen>
+    <dimen name="space_level6">145.00dp</dimen>
+
+    <!-- Feed dimens-->
+    <dimen name="feed_margin_default">12.00dp</dimen>
+    <dimen name="feed_stories_margin_top">18.00dp</dimen>
+    <dimen name="feed_post_margin_top">20.00dp</dimen>
+    <dimen name="feed_default_button_width">145.00dp</dimen>
+
+    <!-- Default button padding -->
+    <dimen name="default_button_padding_start">9dp</dimen>
+    <dimen name="default_button_padding_end">9dp</dimen>
+    <dimen name="default_button_padding_top">14dp</dimen>
+    <dimen name="default_button_padding_bottom">14dp</dimen>
+    <dimen name="default_button_min_height">54dp</dimen>
+
+    <dimen name="corner_radius8dp">8.00dp</dimen>
+    <dimen name="corner_radiusStories">12.00dp</dimen>
+<!--    <dimen name="space_2dp">2.dp</dimen>-->
+<!--    <dimen name="space_2dp">2.dp</dimen>-->
+<!--    <dimen name="space_2dp">2.dp</dimen>-->
+<!--    <dimen name="space_2dp">2.dp</dimen>-->
+<!--    <dimen name="space_2dp">2.dp</dimen>-->
+</resources>
