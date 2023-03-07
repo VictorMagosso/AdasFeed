@@ -43,9 +43,11 @@ class ProfileActivity : AppCompatActivity() {
             } else {
                 bundle.getParcelable(EXTRA_KEY) as? User
             }
+            // mais de um parametro na string
+//            textUserName.text = getString(R.string.profile_name, safeUser.userName, safeUser.userNickname)
 
             user?.let { safeUser ->
-                textUserName.text = safeUser.userName
+                textUserName.text = getString(R.string.profile_name, safeUser.userName)
                 textNickname.text = safeUser.userNickname
                 imageUser.setImageResource(safeUser.imageUser)
                 uri = safeUser.tel?.let {
@@ -57,6 +59,7 @@ class ProfileActivity : AppCompatActivity() {
         buttonCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
+            finish()
         }
     }
 

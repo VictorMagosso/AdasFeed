@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_post_label">Nuevo post</string>
+    <string name="go_to_profile_label">Ir para la telita del perfil</string>
+</resources>

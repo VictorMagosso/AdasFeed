@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
 //        val imageFotoDePerfil = findViewById<ImageView>()
 //        val editTextSenha = findViewById<EditText>()
 
-        buttonVerMais = findViewById(R.id.buttonVerMais)
-        val buttonVerMenos = findViewById<Button>(R.id.buttonVerMenos)
+//        val buttonVerMenos = findViewById<Button>(R.id.buttonVerMenos)
+//        buttonVerMais = findViewById(R.id.buttonVerMais)
         textDescricao = findViewById(R.id.textDescricao)
 
         val txt = ""
@@ -36,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         mostrarMaisDescricao()
 
         /** Conseguimos adicionar listeners de click para nossas views da seguinte forma: **/
-        buttonVerMenos.setOnClickListener {
-            textDescricao.maxLines = 2
-        }
+//        buttonVerMenos.setOnClickListener {
+//            textDescricao.maxLines = 2
+//        }
 
         /** Conseguimos alterar o estado  **/
 //        if (2 > 3) {
