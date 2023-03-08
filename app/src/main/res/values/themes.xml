@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.AdasFeed" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/brand_secondary_color</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/brand_accent_color</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/brand_secondary_color_accent</item>
         <item name="colorSecondaryVariant">@color/brand_primary_accent_color</item>
@@ -29,10 +29,11 @@
         <item name="android:paddingBottom">@dimen/default_button_padding_bottom</item>
         <item name="android:background">@drawable/button_outlined_default</item>
         <item name="android:minHeight">@dimen/default_button_min_height</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
     <style name="DefaultTextH1" parent="Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/text_title_default</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:fontFamily">@font/font_inter</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/text_defaultH1</item>
