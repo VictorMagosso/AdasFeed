@@ -92,7 +92,7 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         holder.imageUser.setImageResource(postList[position].imageUser)
 
         holder.imageLiked.setOnClickListener {
-            holder.imageLiked.setImageResource(R.drawable.liked_fill)
+            holder.imageLiked.setImageResource(R.drawable.favorite_filled)
         }
     }
 
