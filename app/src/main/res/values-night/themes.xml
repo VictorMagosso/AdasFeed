@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.AdasFeed" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/brand_primary_color</item>
+        <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/brand_accent_color</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/brand_secondary_color_accent</item>
         <item name="colorSecondaryVariant">@color/brand_secondary_color_accent</item>
@@ -18,7 +18,6 @@
     <style name="ToolbarAppTitle" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/kristi_regular</item>
         <item name="android:textSize">@dimen/toolbar_text_size</item>
-        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="DefaultActionButton" parent="Widget.AppCompat.Button">
@@ -32,7 +31,7 @@
     </style>
 
     <style name="DefaultTextH1" parent="Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:fontFamily">@font/font_inter</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/text_defaultH1</item>

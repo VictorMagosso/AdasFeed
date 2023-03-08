@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     tools:context=".ProfileActivity">
 
     <TextView
@@ -11,8 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="#000000"
-        android:textSize="@dimen/toolbar_text_size"
+        style="@style/ToolbarAppTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +42,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:text="@string/profile_name"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageUser"
@@ -55,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="\@---"
-        android:textColor="#000000"
+        android:text="@string/profile_nickname"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textUserName"
@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="20dp"
+        android:textColor="?attr/colorOnPrimary"
         android:text="Nome:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonContact" />
@@ -97,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textColor="?attr/colorOnPrimary"
         android:text="Nickname:"
         app:layout_constraintStart_toStartOf="@+id/textUserNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/editUserName" />
@@ -123,6 +125,7 @@
         app:layout_constraintStart_toStartOf="@+id/editNickaname" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_save_profile"
