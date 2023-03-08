@@ -1,4 +1,4 @@
-package com.victor.adasfeed
+package com.victor.adasfeed.ui.recyclerview.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.victor.adasfeed.R
+import com.victor.adasfeed.mock.Faker
+import com.victor.adasfeed.model.Story
 
 class StoriesAdapter(
-    private val storiesList: List<Stories> = mockList()
+    private val storyList: List<Story> = Faker.makeStoryList()
 ) : RecyclerView.Adapter<StoriesAdapter.StoriesViewHolder>() {
 
     inner class StoriesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,49 +36,17 @@ class StoriesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return storiesList.size
+        return storyList.size
     }
 
-    //Bind = vincular
-    //View holder = "segura" um espaço pra view
     override fun onBindViewHolder(holder: StoriesViewHolder, position: Int) {
-        holder.textUserName.text = storiesList[position].textUserName
-        holder.textTimeInMinutes.text = storiesList[position].textTimeInMinutes
-        holder.imageUser.setImageResource(storiesList[position].imageUser)
-        holder.imagePost.setImageResource(storiesList[position].imagePost)
+        holder.textUserName.text = storyList[position].textUserName
+        holder.textTimeInMinutes.text = storyList[position].textTimeInMinutes
+        holder.imageUser.setImageResource(storyList[position].imageUser)
+        holder.imagePost.setImageResource(storyList[position].imagePost)
 
         holder.textUserName.setOnClickListener {
             println(holder.textUserName.text)
         }
     }
 }
-
-data class Stories(
-    val textUserName: String,
-    val textTimeInMinutes: String,
-    val imageUser: Int,
-    val imagePost: Int,
-)
-
-private fun mockList() = listOf(Stories(
-    "Joao",
-    "15 m",
-    imageUser = R.drawable.user1,
-    imagePost = R.drawable.stories1,
-),
-    Stories(
-        "Victor",
-        "28 m",
-        imageUser = R.drawable.user2,
-        imagePost = R.drawable.stories2,
-    ), Stories(
-        "Marina da Silva Costa",
-        "59 m",
-        imageUser = R.drawable.user3,
-        imagePost = R.drawable.stories3,
-    ), Stories(
-        "Ninja desconhecido",
-        "60 m",
-        imageUser = R.drawable.user4,
-        imagePost = R.drawable.stories4,
-    ))
