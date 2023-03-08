@@ -35,6 +35,9 @@
         android:layout_marginTop="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/universe_image"
+        android:foreground="?attr/selectableItemBackground"
+        android:longClickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/imageUser" />
 
     <ImageView

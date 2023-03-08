@@ -85,7 +85,7 @@ class FeedActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         buttonNewPost.setOnClickListener {
-            postAdapter.addNewPost(
+            postAdapter.addPost(
                 Post(
                     userName = "Esse é novo",
                     description = "Estou sendo adicionado do feed activity 2",
