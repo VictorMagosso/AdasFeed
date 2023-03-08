@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,10 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var headerView: View
+    private lateinit var tvUsername: TextView
+    private lateinit var tvNickname: TextView
+
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +39,7 @@ class FeedActivity : AppCompatActivity() {
         Log.d("contexto no onCreate", applicationContext.toString())
         setContentView(R.layout.activity_feed)
 
-        val user = User(
+        user = User(
             userName = "Andrey Freitas",
             userNickname = "@andreyfreitas",
             imageUser = R.drawable.user1,
@@ -47,6 +52,7 @@ class FeedActivity : AppCompatActivity() {
 
         // inicializa views (findViewById())
         initViews()
+        setHeaderInfo()
         // monta os recyclerViews
         setupRecyclerViews()
         // criar os listeners
@@ -67,6 +73,11 @@ class FeedActivity : AppCompatActivity() {
         }
     }
 
+    private fun setHeaderInfo() {
+        tvUsername.text = user.userName
+        tvNickname.text = user.userNickname
+    }
+
     private suspend fun renderButtonText() {
         delay(1L)
         Log.d("acabou o delay", " - ")
@@ -84,6 +95,8 @@ class FeedActivity : AppCompatActivity() {
 //        buttonRenderNewList = findViewById(R.id.buttonRenderNewList)
         buttonGoToProfile = findViewById(R.id.buttonGoToProfile)
         headerView = findViewById(R.id.headerView)
+        tvUsername = findViewById(R.id.textName)
+        tvNickname = findViewById(R.id.textNickname)
     }
 
     private fun setupRecyclerViews() {
