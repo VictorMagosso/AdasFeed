@@ -1,6 +1,5 @@
-package com.victor.adasfeed.passandodados
+package com.victor.adasfeed.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
