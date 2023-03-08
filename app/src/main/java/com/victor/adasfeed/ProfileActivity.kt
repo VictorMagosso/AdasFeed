@@ -5,11 +5,14 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.victor.adasfeed.passandodados.User
 
 class ProfileActivity : AppCompatActivity() {
@@ -20,6 +23,10 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var textNickname: TextView
     private lateinit var buttonCall: Button
     private lateinit var imageUser: ImageView
+    private lateinit var userNameField: EditText
+    private lateinit var nickNameField: EditText
+    private lateinit var buttonSave: FloatingActionButton
+    private lateinit var User: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +38,9 @@ class ProfileActivity : AppCompatActivity() {
         textNickname = findViewById(R.id.textNickname)
         buttonCall = findViewById(R.id.buttonContact)
         imageUser = findViewById(R.id.imageUser)
+        userNameField = findViewById<EditText>(R.id.editUserName)
+        nickNameField = findViewById<EditText>(R.id.editNickname)
+        buttonSave = findViewById(R.id.buttonSaveProfile)
 
         val extras = intent.extras
         var uri = Uri.parse("")
@@ -61,6 +71,58 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        fun updateUserName(newName: String) {
+            textUserName.text = newName
+        }
+
+        fun updateNickame(newNickname: String) {
+            textNickname.text = newNickname
+        }
+
+        userNameField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // This method is called before the text is changed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // This method is called when the text is changed
+                val newName = s.toString()
+
+                // Update the name on the view in real-time
+                updateUserName(newName)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // This method is called after the text is changed
+            }
+        })
+
+        nickNameField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // This method is called before the text is changed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // This method is called when the text is changed
+                val newName = "@"+s.toString()
+
+                // Update the name on the view in real-time
+                updateNickame(newName)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // This method is called after the text is changed
+            }
+        })
+
+        buttonSave.setOnClickListener {
+            val userName = userNameField.text.toString()
+            val nickName = nickNameField.text.toString()
+
+            //  updateUserProfile(newUserName,newUserNickname)
+        }
+
     }
 
     override fun onStart() {
@@ -73,3 +135,4 @@ class ProfileActivity : AppCompatActivity() {
         Log.d("ciclo de vida PA", "onResume")
     }
 }
+
