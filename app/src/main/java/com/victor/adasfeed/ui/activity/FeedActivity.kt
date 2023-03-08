@@ -1,6 +1,5 @@
 package com.victor.adasfeed.ui.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,13 +12,11 @@ import com.victor.adasfeed.R
 import com.victor.adasfeed.model.Post
 import com.victor.adasfeed.ui.recyclerview.adapter.StoriesAdapter
 import com.victor.adasfeed.model.User
-
-const val EXTRA_KEY = "EXTRA_KEY"
+import com.victor.adasfeed.ui.activity.resultcontract.UserActivityResultContract
 
 class FeedActivity : AppCompatActivity() {
-    private lateinit var buttonNewPost: Button
-    private lateinit var buttonRenderNewList: Button
-    private lateinit var buttonGoToProfile: Button
+    private lateinit var newPostBtn: Button
+    private lateinit var goToProfileBtn: Button
     private lateinit var rvStories: RecyclerView
     private lateinit var rvPosts: RecyclerView
     private lateinit var postAdapter: PostAdapter
@@ -41,30 +38,26 @@ class FeedActivity : AppCompatActivity() {
             tel = "+55 (11) 123456789"
         )
 
-        val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
-            putExtra(EXTRA_KEY, user)
-        }
-
         initViews()
         setHeaderInfo()
         setupRecyclerViews()
         setupClickListeners()
-        setupNavigationListeners(intent)
-    }
-
-    private fun setHeaderInfo() {
-        tvUsername.text = user.userName
-        tvNickname.text = user.userNickname
+        setupNavigationListeners()
     }
 
     private fun initViews() {
         rvStories = findViewById(R.id.rvStories)
         rvPosts = findViewById(R.id.rvPosts)
-        buttonNewPost = findViewById(R.id.buttonNewPost)
-        buttonGoToProfile = findViewById(R.id.buttonGoToProfile)
+        newPostBtn = findViewById(R.id.buttonNewPost)
+        goToProfileBtn = findViewById(R.id.buttonGoToProfile)
         headerView = findViewById(R.id.headerView)
         tvUsername = findViewById(R.id.textName)
         tvNickname = findViewById(R.id.textNickname)
+    }
+
+    private fun setHeaderInfo() {
+        tvUsername.text = user.userName
+        tvNickname.text = user.userNickname
     }
 
     private fun setupRecyclerViews() {
@@ -85,7 +78,7 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        buttonNewPost.setOnClickListener {
+        newPostBtn.setOnClickListener {
             postAdapter.addNewPost(
                 Post(
                     userName = "Esse é novo",
@@ -95,15 +88,22 @@ class FeedActivity : AppCompatActivity() {
                 )
             )
         }
-
-        headerView.setOnClickListener {
-            startActivity(Intent(applicationContext, ProfileActivity::class.java))
-        }
     }
 
-    private fun setupNavigationListeners(intent: Intent) {
-        buttonGoToProfile.setOnClickListener {
-            startActivity(intent)
+    private fun setupNavigationListeners() {
+        val launcher = registerForActivityResult(UserActivityResultContract()) { res ->
+            res?.let {
+                user = it
+                setHeaderInfo()
+            }
+        }
+
+        headerView.setOnClickListener {
+            launcher.launch(user)
+        }
+
+        goToProfileBtn.setOnClickListener {
+            launcher.launch(user)
         }
     }
 }
