@@ -8,11 +8,22 @@ private fun String?.orEmptyString() = this ?: ""
 
 @Parcelize
 data class User(
-    val userName: String,
-    val userNickname: String,
+    var userName: String,
+    var userNickname: String,
     val imageUser: Int,
     val tel: String? = null,
-) : Parcelable
+) : Parcelable{
+    fun updateUserProfile(newUserName: String, newUserNickname: String) {
+        // Update the UserName and NickName fields here
+        if (newUserName.isNotEmpty()) {
+            userName = newUserName
+        }
+
+        if (newUserNickname.isNotEmpty()) {
+            userNickname = newUserNickname
+        }
+    }
+}
 //
 //data class User1(
 //    val userName: String,

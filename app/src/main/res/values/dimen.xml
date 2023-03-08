@@ -44,6 +44,9 @@
     <dimen name="default_button_padding_bottom">14dp</dimen>
     <dimen name="default_button_min_height">54dp</dimen>
 
+    <!-- Contact button dimen -->
+    <dimen name="act_prof_contact_button_width">160.00dp</dimen>
+
     <dimen name="corner_radius8dp">8.00dp</dimen>
     <dimen name="corner_radiusStories">12.00dp</dimen>
 <!--    <dimen name="space_2dp">2.dp</dimen>-->

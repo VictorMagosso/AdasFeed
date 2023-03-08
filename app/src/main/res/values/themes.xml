@@ -29,6 +29,18 @@
         <item name="android:paddingBottom">@dimen/default_button_padding_bottom</item>
         <item name="android:background">@drawable/button_outlined_default</item>
         <item name="android:minHeight">@dimen/default_button_min_height</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="CallButton" parent="Widget.AppCompat.Button">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingStart">@dimen/default_button_padding_start</item>
+        <item name="android:paddingEnd">@dimen/default_button_padding_end</item>
+        <item name="android:paddingTop">@dimen/default_button_padding_top</item>
+        <item name="android:paddingBottom">@dimen/default_button_padding_bottom</item>
+        <item name="android:background">@drawable/rounded_button</item>
+        <item name="android:minHeight">@dimen/default_button_min_height</item>
     </style>
 
     <style name="DefaultTextH1" parent="Widget.AppCompat.TextView">
