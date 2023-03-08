@@ -8,6 +8,8 @@ data class Post(
     val description: String,
     val imagePost: Int,
     val imageUser: Int,
-    val isLiked: Boolean = false,
-    val isFavorite: Boolean = false,
-)
+    var isLiked: Boolean = false,
+    var isFavorite: Boolean = false,
+) {
+    override fun toString() = uid.toString()
+}

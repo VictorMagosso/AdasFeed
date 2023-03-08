@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.snackbar.Snackbar
 import com.victor.adasfeed.R
 import com.victor.adasfeed.mock.Faker
 import com.victor.adasfeed.model.Post
+import com.victor.adasfeed.repository.LikedPostsRepo
 
 class PostAdapter(private val postList: MutableList<Post> = Faker.makePostList()) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
@@ -42,7 +44,17 @@ class PostAdapter(private val postList: MutableList<Post> = Faker.makePostList()
             ivUser.setImageResource(p.imageUser)
 
             ivHeart.setOnClickListener {
-                ivHeart.setImageResource(R.drawable.favorite_filled)
+                p.isLiked = !p.isLiked
+
+                if (p.isLiked) {
+                    ivHeart.setImageResource(R.drawable.favorite_filled)
+                    LikedPostsRepo.add(p)
+                } else {
+                    ivHeart.setImageResource(R.drawable.favorite)
+                    LikedPostsRepo.remove(p)
+                }
+
+                Toast.makeText(ivHeart.context, LikedPostsRepo.toString(), Toast.LENGTH_SHORT).show()
             }
 
             ivPost.setOnLongClickListener {
