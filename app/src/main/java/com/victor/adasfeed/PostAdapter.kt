@@ -5,18 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.*
 
-data class Post(
-    val userName: String,
-    val description: String,
-    val imagePost: Int,
-    val imageUser: Int,
-    val isLiked: Boolean = false,
-    val isFavorite: Boolean = false,
-)
 
 private fun mockedPostList() = mutableListOf(
     Post(
@@ -60,7 +56,8 @@ private fun mockedPostList() = mutableListOf(
         description = "Olhem meus doguinhos que fofos",
         imagePost = R.drawable.feed2,
         imageUser = R.drawable.user2,
-    ), Post(
+    ),
+    Post(
         userName = "Marcela",
         description = "Olhem meus doguinhos que fofos",
         imagePost = R.drawable.feed2,
@@ -75,7 +72,10 @@ private fun mockedPostList() = mutableListOf(
 
 )
 
-class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
+class PostAdapter(
+    private val postList: MutableList<Post> = mockedPostList(),
+    private val clickUndoDelete: (DeleteItem) -> Unit
+) :
     RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val postView =
@@ -86,24 +86,63 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
     override fun getItemCount() = postList.size
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.textUserName.text = postList[position].userName
-        holder.textPostDescription.text = postList[position].description
-        holder.imagePost.setImageResource(postList[position].imagePost)
-        holder.imageUser.setImageResource(postList[position].imageUser)
+        val currentPost = postList[position]
+        holder.textUserName.text = currentPost.userName
+        holder.textPostDescription.text = currentPost.description
+        holder.imagePost.setImageResource(currentPost.imagePost)
+        holder.imageUser.setImageResource(currentPost.imageUser)
 
-        holder.imageLiked.setOnClickListener {
-            holder.imageLiked.setImageResource(R.drawable.liked_fill)
+        if (currentPost.isLiked) {
+            holder.likedButton.setIconResource(R.drawable.ic_liked)
+        } else {
+            holder.likedButton.setIconResource(R.drawable.ic_empty_liked)
+        }
+        holder.likedButton.setOnClickListener {
+            val newObject = currentPost.copy(isLiked = !currentPost.isLiked)
+            val newList = ArrayList(postList)
+            newList[position] = newObject
+            setNewList(newList)
+            if (newList[position].isLiked) {
+                val likedPosts = postList.filter { it.isLiked }
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Post liked: \n ${likedPosts.joinToString {it.userName + ", " + it.description + "\n"}}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        }
+
+
+        holder.imagePost.setOnLongClickListener { it ->
+            removePost(position)
+            Snackbar.make(it, "Post removido", Snackbar.LENGTH_LONG)
+                .setAction("Desfazer") {
+                    clickUndoDelete(DeleteItem(position, currentPost))
+                }.setDuration(5_000).show()
+            true
         }
     }
 
-    fun addNewPost(newPost: Post) {
-        postList.add(newPost)
+    fun addNewPost(newPost: Post, position: Int? = null) {
+        if (position != null) {
+            postList.add(position, newPost)
+        } else {
+            postList.add(newPost)
+        }
         notifyItemInserted(postList.indexOf(newPost))
         // perde performance pois recria a lista inteira
         // o DiffUtilCallback é melhor
     }
 
-    fun setNewList(newList: List<Post>) {
+    private fun removePost(position: Int) {
+        val newPostList = ArrayList(postList)
+        newPostList.removeAt(position)
+        setNewList(newPostList)
+    }
+
+
+    private fun setNewList(newList: List<Post>) {
         val diffCallback = PostDiffUtilCallback(oldPostList = postList, newPostList = newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         postList.clear()
@@ -111,29 +150,8 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
 //        notifyDataSetChanged()
         diffResult.dispatchUpdatesTo(this)
     }
-}
 
-class PostDiffUtilCallback(
-    private val oldPostList: List<Post>,
-    private val newPostList: List<Post>,
-) : DiffUtil.Callback() {
-    override fun getOldListSize() = oldPostList.size
 
-    override fun getNewListSize() = newPostList.size
-
-    // osItensSãoOsMesmos?
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldPostItem: Post = oldPostList[oldItemPosition]
-        val newPostItem: Post = newPostList[newItemPosition]
-        return oldPostItem.javaClass == newPostItem.javaClass
-    }
-
-    // osConteudosSãoOsMesmos?
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldPostItem: Post = oldPostList[oldItemPosition]
-        val newPostItem: Post = newPostList[newItemPosition]
-        return oldPostItem.hashCode() == newPostItem.hashCode()
-    }
 }
 
 class PostViewHolder(view: View) : ViewHolder(view) {
@@ -141,15 +159,15 @@ class PostViewHolder(view: View) : ViewHolder(view) {
     val textPostDescription: TextView
     val imageUser: ImageView
     val imagePost: ImageView
-    val imageLiked: ImageView
     val imageFavorite: ImageView
+    val likedButton: MaterialButton
 
     init {
         textUserName = view.findViewById(R.id.textUserName)
         textPostDescription = view.findViewById(R.id.textPostDescription)
         imageUser = view.findViewById(R.id.imageUser)
         imagePost = view.findViewById(R.id.imagePost)
-        imageLiked = view.findViewById(R.id.imageLiked)
+        likedButton = view.findViewById(R.id.liked_button)
         imageFavorite = view.findViewById(R.id.imageFavorite)
     }
 }

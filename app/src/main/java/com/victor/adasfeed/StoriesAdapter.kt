@@ -50,13 +50,6 @@ class StoriesAdapter(
     }
 }
 
-data class Stories(
-    val textUserName: String,
-    val textTimeInMinutes: String,
-    val imageUser: Int,
-    val imagePost: Int,
-)
-
 private fun mockList() = listOf(Stories(
     "Joao",
     "15 m",

@@ -37,13 +37,15 @@
         android:src="@drawable/universe_image"
         app:layout_constraintTop_toBottomOf="@+id/imageUser" />
 
-    <ImageView
-        android:id="@+id/imageLiked"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_marginLeft="14dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/liked_button"
+        style="@style/ButtonWithIconOnly"
+        app:icon="@drawable/ic_empty_liked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        app:iconPadding="0dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/liked1"
         app:layout_constraintStart_toStartOf="@+id/imagePost"
         app:layout_constraintTop_toBottomOf="@+id/imagePost" />
 
@@ -51,22 +53,21 @@
         android:id="@+id/textPostDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:textSize="10dp"
         android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="@id/imageLiked"
-        app:layout_constraintLeft_toRightOf="@id/imageLiked"
-        app:layout_constraintTop_toTopOf="@id/imageLiked"
+        app:layout_constraintBottom_toBottomOf="@id/liked_button"
+        app:layout_constraintLeft_toRightOf="@id/liked_button"
+        app:layout_constraintTop_toTopOf="@id/liked_button"
         tools:text="Hoje foi dia de muita gravação 🎵" />
 
     <ImageView
         android:id="@+id/imageFavorite"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_marginRight="12dp"
-        android:src="@drawable/favorite"
-        app:layout_constraintBottom_toBottomOf="@+id/imageLiked"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_save_favorite_empty"
+        app:layout_constraintBottom_toBottomOf="@+id/liked_button"
         app:layout_constraintEnd_toEndOf="@+id/imagePost"
-        app:layout_constraintTop_toTopOf="@+id/imageLiked"
+        app:layout_constraintTop_toTopOf="@+id/liked_button"
         app:layout_goneMarginTop="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
