@@ -1,5 +1,8 @@
 package com.victor.adasfeed.passandodados
 
+import android.content.Intent
+import android.os.Build
+import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -12,18 +15,28 @@ data class User(
     var userNickname: String,
     val imageUser: Int,
     val tel: String? = null,
-) : Parcelable{
-    fun updateUserProfile(newUserName: String, newUserNickname: String) {
+) : Parcelable {
+    fun updateUserProfile(newUserName: String, newUserNickname: String): Boolean {
         // Update the UserName and NickName fields here
         if (newUserName.isNotEmpty()) {
             userName = newUserName
         }
 
         if (newUserNickname.isNotEmpty()) {
-            userNickname = newUserNickname
+            userNickname = "@$newUserNickname"
         }
+
+        return !(newUserName.isNullOrEmpty() and newUserNickname.isEmpty())
     }
 }
+
+fun extractUser(EXTRA_KEY: String, bundle: Bundle): User? =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+        bundle.getParcelable(EXTRA_KEY, User::class.java)
+    else
+        bundle.getParcelable(EXTRA_KEY) as? User
+
+
 //
 //data class User1(
 //    val userName: String,

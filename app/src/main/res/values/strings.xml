@@ -12,4 +12,6 @@
     <string name="enter_your_nickname">Enter your Nickname</string>
     <string name="enter_your_user_name">Enter your User Name</string>
     <string name="button_description_save_profile">The image shows a small diskette inside a circular button.</string>
+    <string name="portuguese_greeting">Olá,</string>
+    <string name="percent_s">%s</string>
 </resources>
