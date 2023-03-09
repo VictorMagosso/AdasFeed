@@ -87,7 +87,7 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 // This method is called when the text is changed
-                val newName = s.toString()
+                val newName = "Nome: "+s.toString()
 
                 // Update the name on the view in real-time
                 updateUserName(newName)

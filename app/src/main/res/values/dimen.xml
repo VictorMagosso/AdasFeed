@@ -35,7 +35,7 @@
     <dimen name="feed_margin_default">12.00dp</dimen>
     <dimen name="feed_stories_margin_top">18.00dp</dimen>
     <dimen name="feed_post_margin_top">20.00dp</dimen>
-    <dimen name="feed_default_button_width">145.00dp</dimen>
+    <dimen name="feed_default_button_width">160.00dp</dimen>
 
     <!-- Default button padding -->
     <dimen name="default_button_padding_start">9dp</dimen>

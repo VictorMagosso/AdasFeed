@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textAppTitle"
             android:text="Olá,"
-            android:textColor="#1a1a1a"
+            android:textColor="?attr/colorOnSecondary"
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
