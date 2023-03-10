@@ -2,7 +2,6 @@ package com.victor.adasfeed
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -56,7 +55,7 @@ class ProfileActivity : AppCompatActivity() {
         textUserName.text = newName
     }
 
-    fun updateNickame(newNickname: String) {
+    fun updateNickname(newNickname: String) {
         textNickname.text = newNickname
     }
 
@@ -93,10 +92,10 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 // This method is called when the text is changed
-                val newName = "@" + s.toString()
+                val newNickname = "@" + s.toString()
 
                 // Update the name on the view in real-time
-                updateNickame(newName)
+                updateNickname(newNickname)
             }
 
             override fun afterTextChanged(s: Editable?) {
