@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="new_post_label">Nuevo post</string>
+    <string name="app_name">Ada\'s Feed</string>
     <string name="go_to_profile_label">Ir para la telita del perfil</string>
+    <string name="new_post_label">Nuevo post</string>
+    <string name="profile_name">Nombre: %s</string>
+    <string name="toast_action_post_removed">Deshacer</string>
+    <string name="toast_message_post_removed">Publicación eliminada</string>
 </resources>
