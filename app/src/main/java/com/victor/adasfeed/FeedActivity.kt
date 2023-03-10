@@ -1,22 +1,34 @@
 package com.victor.adasfeed
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.adasfeed.FakePosts.makePostList
 import com.victor.adasfeed.passandodados.User
+import com.victor.adasfeed.utils.ExtraKeys.EXTRA_KEY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
-const val EXTRA_KEY = "EXTRA_KEY"
+private fun createNewUser() =
+    User("Victor Magosso", "@victormagosso", R.drawable.user5, "+5511555555555")
+
+private fun getUserFromExtras(extras: Bundle?) =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        extras?.getParcelable(EXTRA_KEY, User::class.java)
+    } else {
+        extras?.getParcelable(EXTRA_KEY) as? User
+    }
 
 class FeedActivity : AppCompatActivity() {
     private lateinit var buttonNewPost: Button
@@ -27,6 +39,9 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var headerView: View
+    private lateinit var headerName: TextView
+    private lateinit var headerNickname: TextView
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +49,8 @@ class FeedActivity : AppCompatActivity() {
         Log.d("contexto no onCreate", applicationContext.toString())
         setContentView(R.layout.activity_feed)
 
-        val user = User(
-            userName = "Andrey Freitas",
-            userNickname = "@andreyfreitas",
-            imageUser = R.drawable.user1,
-            tel = "+55 (11) 123456789"
-        )
+        val extras = intent.extras
+        user = getUserFromExtras(extras) ?: createNewUser()
 
         val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
             putExtra(EXTRA_KEY, user)
@@ -83,7 +94,13 @@ class FeedActivity : AppCompatActivity() {
         buttonNewPost = findViewById(R.id.buttonNewPost)
 //        buttonRenderNewList = findViewById(R.id.buttonRenderNewList)
         buttonGoToProfile = findViewById(R.id.buttonGoToProfile)
+
         headerView = findViewById(R.id.headerView)
+        headerName = headerView.findViewById(R.id.textName)
+        headerNickname = headerView.findViewById(R.id.textNickname)
+
+        headerName.text = user?.userName
+        headerNickname.text = user?.userNickname
     }
 
     private fun setupRecyclerViews() {
@@ -118,10 +135,6 @@ class FeedActivity : AppCompatActivity() {
                     imagePost = R.drawable.stories2
                 )
             )
-        }
-
-        headerView.setOnClickListener {
-            startActivity(Intent(applicationContext, ProfileActivity::class.java))
         }
     }
 
