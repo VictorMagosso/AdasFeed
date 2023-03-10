@@ -1,6 +1,8 @@
 package com.victor.adasfeed
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +29,7 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var headerView: View
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +37,29 @@ class FeedActivity : AppCompatActivity() {
         Log.d("contexto no onCreate", applicationContext.toString())
         setContentView(R.layout.activity_feed)
 
-        val user = User(
-            userName = "Andrey Freitas",
-            userNickname = "@andreyfreitas",
-            imageUser = R.drawable.user1,
-            tel = "+55 (11) 123456789"
-        )
+        val extras = intent.extras
+        var uri = Uri.parse("")
+
+        // envia por intents - putExtra
+        // recebe por Bundle
+        extras?.let { bundle ->
+            user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable(EXTRA_KEY, User::class.java)
+            } else {
+                bundle.getParcelable(EXTRA_KEY) as? User
+            }
+            user?.let { safeUser ->
+                headerView.textName.text = getString(R.string.profile_name, safeUser.userName)
+                headerView.textNickname.text = safeUser.userNickname
+            }
+        } ?: {
+            user = User(
+                userName = "Andrey Freitas",
+                userNickname = "@andreyfreitas",
+                imageUser = R.drawable.user1,
+                tel = "+55 (11) 123456789"
+            )
+        }
 
         val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
             putExtra(EXTRA_KEY, user)
