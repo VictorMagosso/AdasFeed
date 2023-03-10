@@ -92,7 +92,7 @@ class FeedActivity : AppCompatActivity() {
         storiesLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         storiesAdapter = StoriesAdapter()
-        postAdapter = PostAdapter()
+        postAdapter = PostAdapter(clickUndoDelete = ::onUndoDelete)
 
         rvStories.apply {
             adapter = storiesAdapter
@@ -101,6 +101,12 @@ class FeedActivity : AppCompatActivity() {
 
         rvPosts.apply {
             adapter = postAdapter
+        }
+    }
+
+    private fun onUndoDelete(deletedItem: DeleteItem) {
+        lifecycleScope.launch {
+            postAdapter.addNewPost(deletedItem.item, deletedItem.position)
         }
     }
 
