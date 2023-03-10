@@ -56,3 +56,4 @@ no ícone de coração<br>
  - @eduardo-assimo
  - @juliamarqss
  - @jcmalmeida
+ - @Mariana-da-Costa
