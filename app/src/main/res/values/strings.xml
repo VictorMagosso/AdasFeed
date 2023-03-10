@@ -5,4 +5,5 @@
     <string name="go_to_profile_label">Ir para tela de perfil</string>
 <!--    <string name="profile_name">Nome: %s - %s</string>-->
     <string name="profile_name">Nome: %s</string>
+    <string name="profile">Name</string>
 </resources>
