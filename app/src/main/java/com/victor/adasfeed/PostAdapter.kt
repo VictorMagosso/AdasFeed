@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -15,7 +16,7 @@ data class Post(
     val description: String,
     val imagePost: Int,
     val imageUser: Int,
-    val isLiked: Boolean = false,
+    var isLiked: Boolean = false,
     val isFavorite: Boolean = false
 )
 
@@ -61,9 +62,19 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         holder.textPostDescription.text = postList[position].description
         holder.imagePost.setImageResource(postList[position].imagePost)
         holder.imageUser.setImageResource(postList[position].imageUser)
+        holder.imageLiked.setImageResource(getLikeButtonResource(postList[position].isLiked))
 
         holder.imageLiked.setOnClickListener {
-            holder.imageLiked.setImageResource(R.drawable.liked_fill)
+            val likeState = getLikeButtonResource(toggleLikeAndReturn(position))
+            holder.imageLiked.setImageResource(likeState)
+            Toast.makeText(
+                it.context,
+                getLikedPosts().joinToString(
+                    transform = { post -> "${post.userName} + ${post.isLiked}" },
+                    separator = " "
+                ),
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         holder.rootView.setOnLongClickListener {
@@ -77,6 +88,18 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
             ).show()
             true
         }
+    }
+
+    fun getLikeButtonResource(isLiked: Boolean): Int {
+        return if (isLiked) {
+            R.drawable.liked_fill
+        } else {
+            R.drawable.liked1
+        }
+    }
+
+    fun getLikedPosts(): List<Post> {
+        return postList.filter { it.isLiked }
     }
 
     fun addPostToPosition(post: Post, position: Int) {
@@ -102,6 +125,12 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         postList.removeAt(postPosition)
         notifyItemRemoved(postPosition)
         notifyItemRangeChanged(postPosition, postList.size)
+    }
+
+    fun toggleLikeAndReturn(likedPostPosition: Int): Boolean {
+        val post = postList.elementAt(likedPostPosition)
+        post.apply { isLiked = !isLiked }
+        return post.isLiked
     }
 
     fun setNewList(newList: List<Post>) {
