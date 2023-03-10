@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,17 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="@dimen/toolbar_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <androidx.appcompat.widget.AppCompatImageView-->
-    <!--        android:layout_width="187dp"-->
-    <!--        android:layout_height="271dp"-->
-    <!--        android:src="@drawable/icon_svg_teste"-->
-    <!--        tools:layout_editor_absoluteX="224dp"-->
-    <!--        tools:layout_editor_absoluteY="388dp" />-->
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageUser"
@@ -102,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editUserName" />
 
     <EditText
-        android:id="@+id/editNickaname"
+        android:id="@+id/editNickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/editUserName"
@@ -120,16 +116,17 @@
         android:layout_marginBottom="12dp"
         android:text="Voltar para o feed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editNickaname" />
+        app:layout_constraintStart_toStartOf="@+id/editNickname" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_save_profile"
         app:backgroundTint="#3EAAFF"
         app:backgroundTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="@+id/buttonReturnToFeed"
-        app:layout_constraintEnd_toEndOf="@+id/editNickaname"
+        app:layout_constraintEnd_toEndOf="@+id/editNickname"
         app:layout_constraintTop_toTopOf="@+id/buttonReturnToFeed"
         app:rippleColor="@android:color/holo_orange_dark" />
     <!--    <androidx.fragment.app.FragmentContainerView-->
