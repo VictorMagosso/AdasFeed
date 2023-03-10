@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textAppTitle"
             android:text="Olá,"
-            android:textColor="#1a1a1a"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -37,7 +37,7 @@
         android:layout_gravity="bottom"
         android:gravity="end"
         android:text="\@victorprof"
-        android:textColor="#1E1E1E"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="8dp"
         android:textStyle="bold" />
 </LinearLayout>
