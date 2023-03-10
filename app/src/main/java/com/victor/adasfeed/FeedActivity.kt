@@ -1,6 +1,7 @@
 package com.victor.adasfeed
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,6 @@ import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.victor.adasfeed.FakePosts.makePostList
 import com.victor.adasfeed.passandodados.User
 import com.victor.adasfeed.utils.ExtraKeys.EXTRA_KEY
 import kotlinx.coroutines.CoroutineScope
@@ -184,6 +184,7 @@ class FeedActivity : AppCompatActivity() {
         Log.d("contexto no onStop", applicationContext.toString())
         buttonNewPost.text = "onStop"
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
