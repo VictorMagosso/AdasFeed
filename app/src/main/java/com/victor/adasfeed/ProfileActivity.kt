@@ -8,63 +8,45 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.victor.adasfeed.passandodados.User
 
 class ProfileActivity : AppCompatActivity() {
-    // quebrar o codigo de proposito
-    // private val context = applicationContext.toString()
 
     private lateinit var textUserName: TextView
     private lateinit var textNickname: TextView
+    private lateinit var editUserName: EditText
+    private lateinit var editNickname: EditText
     private lateinit var buttonCall: Button
+    private lateinit var buttonReturn: Button
     private lateinit var imageUser: ImageView
     private lateinit var fabSave: View
     private var user: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-        Log.d("contexto PA", applicationContext.toString())
-        Log.d("ciclo de vida PA", "onCreate")
 
         textUserName = findViewById(R.id.textUserName)
         textNickname = findViewById(R.id.textNickname)
+        editUserName = findViewById(R.id.editUserName)
+        editNickname = findViewById(R.id.editNickname)
         buttonCall = findViewById(R.id.buttonContact)
+        buttonReturn = findViewById(R.id.buttonReturnToFeed)
         imageUser = findViewById(R.id.imageUser)
-
-        fabSave = findViewById(R.id.fabSave)
-        fabSave.setOnClickListener { view ->
-            if (textUserName.text.isNotBlank() && textNickname.text.isNotBlank()) {
-                val alteredUser = user?.copy(
-                    userName = textUserName.text.toString(),
-                    userNickname = textNickname.text.toString()
-                )
-                val intent = Intent(applicationContext, FeedActivity::class.java).apply {
-                    putExtra(EXTRA_KEY, alteredUser)
-                }
-                Snackbar.make(view, "Dados salvos", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null)
-                    .show()
-                startActivity(intent)
-            }
-        }
 
         val extras = intent.extras
         var uri = Uri.parse("")
 
-        // envia por intents - putExtra
-        // recebe por Bundle
         extras?.let { bundle ->
             user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 bundle.getParcelable(EXTRA_KEY, User::class.java)
             } else {
                 bundle.getParcelable(EXTRA_KEY) as? User
             }
-            // mais de um parametro na string
-//            textUserName.text = getString(R.string.profile_name, safeUser.userName, safeUser.userNickname)
 
             user?.let { safeUser ->
                 textUserName.text = getString(R.string.profile_name, safeUser.userName)
@@ -76,20 +58,44 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
+        fabSave = findViewById(R.id.fabSave)
+        fabSave.setOnClickListener { view ->
+            if (editUserName.text.isNotBlank() && editNickname.text.isNotBlank()) {
+                textUserName.text = getString(R.string.profile_name, editUserName.text)
+                textNickname.text = editNickname.text
+                user = user?.copy(
+                    userName = editUserName.text.toString(),
+                    userNickname = editNickname.text.toString()
+                )
+                Snackbar.make(view, "Dados salvos", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+            }
+        }
+
         buttonCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
             finish()
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("ciclo de vida PA", "onStart")
-    }
+        buttonReturn.setOnClickListener {
+            val intent = Intent(applicationContext, FeedActivity::class.java).apply {
+                putExtra(EXTRA_KEY, user)
+            }
+            startActivity(intent)
+        }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("ciclo de vida PA", "onResume")
+        editUserName.setOnKeyListener { view, i, keyEvent ->
+            textUserName.text = getString(R.string.profile_name, editUserName.text)
+            false
+        }
+
+        editNickname.setOnKeyListener { view, i, keyEvent ->
+            textNickname.text = editNickname.text
+            false
+        }
+
     }
 }

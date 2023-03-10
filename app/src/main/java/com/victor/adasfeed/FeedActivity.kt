@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,8 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var headerView: View
+    private lateinit var textName: TextView
+    private lateinit var textNickname: TextView
     private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,16 @@ class FeedActivity : AppCompatActivity() {
         Log.d("ciclo de vida", "onCreate")
         Log.d("contexto no onCreate", applicationContext.toString())
         setContentView(R.layout.activity_feed)
+
+        textName = findViewById(R.id.textName)
+        textNickname = findViewById(R.id.textNickname)
+
+        var oldUser = User(
+            userName = "Andrey Freitas",
+            userNickname = "@andreyfreitas",
+            imageUser = R.drawable.user1,
+            tel = "+55 (11) 123456789"
+        )
 
         val extras = intent.extras
         var uri = Uri.parse("")
@@ -49,16 +62,13 @@ class FeedActivity : AppCompatActivity() {
                 bundle.getParcelable(EXTRA_KEY) as? User
             }
             user?.let { safeUser ->
-                headerView.textName.text = getString(R.string.profile_name, safeUser.userName)
-                headerView.textNickname.text = safeUser.userNickname
+                textName.text = getString(R.string.profile_name, safeUser.userName)
+                textNickname.text = safeUser.userNickname
             }
-        } ?: {
-            user = User(
-                userName = "Andrey Freitas",
-                userNickname = "@andreyfreitas",
-                imageUser = R.drawable.user1,
-                tel = "+55 (11) 123456789"
-            )
+        }
+
+        if (user == null) {
+            user = oldUser
         }
 
         val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
@@ -67,6 +77,8 @@ class FeedActivity : AppCompatActivity() {
 
         // inicializa views (findViewById())
         initViews()
+        textName.text = user!!.userName
+        textNickname.text = user!!.userNickname
         // monta os recyclerViews
         setupRecyclerViews()
         // criar os listeners
