@@ -11,17 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="#000000"
+        android:textColor="@color/pink"
         android:textSize="@dimen/toolbar_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <androidx.appcompat.widget.AppCompatImageView-->
-    <!--        android:layout_width="187dp"-->
-    <!--        android:layout_height="271dp"-->
-    <!--        android:src="@drawable/icon_svg_teste"-->
-    <!--        tools:layout_editor_absoluteX="224dp"-->
-    <!--        tools:layout_editor_absoluteY="388dp" />-->
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageUser"
@@ -42,7 +35,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:text="@string/profile_name"
-        android:textColor="#000000"
+        android:textColor="@color/pink"
         android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageUser"
@@ -55,8 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="\@---"
-        android:textColor="#000000"
+        android:text="@string/prefixe_nickname"
+        android:textColor="@color/pink"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textUserName"
@@ -68,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Entrar em contato"
+        android:text="@string/contact"
         app:layout_constraintEnd_toEndOf="@+id/textNickname"
         app:layout_constraintStart_toStartOf="@+id/textNickname"
         app:layout_constraintTop_toBottomOf="@+id/textNickname" />
@@ -79,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="20dp"
-        android:text="Nome:"
+        android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonContact" />
 
@@ -97,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Nickname:"
+        android:text="@string/nickname"
         app:layout_constraintStart_toStartOf="@+id/textUserNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/editUserName" />
 
@@ -109,20 +102,17 @@
         app:layout_constraintStart_toStartOf="@+id/editUserName"
         app:layout_constraintTop_toBottomOf="@+id/textNicknameLabel" />
 
-    <!--    <ImageView-->
-    <!--        android:layout_width="66dp"-->
-    <!--        android:layout_height="57dp"-->
-    <!--        android:src="@drawable/ic_save_profile" />-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReturnToFeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="Voltar para o feed"
+        android:text="@string/back_to_feed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editNickaname" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_save_profile"
@@ -132,17 +122,5 @@
         app:layout_constraintEnd_toEndOf="@+id/editNickaname"
         app:layout_constraintTop_toTopOf="@+id/buttonReturnToFeed"
         app:rippleColor="@android:color/holo_orange_dark" />
-    <!--    <androidx.fragment.app.FragmentContainerView-->
-    <!--        android:id="@+id/fragmentList"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        android:name="com.victor.adasfeed.ListFragment"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:layout="@layout/fragment_list" />-->
-
-    <!-- <include> nao tem ciclo de vida -->
-    <!--    <include /> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
