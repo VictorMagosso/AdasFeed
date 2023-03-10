@@ -1,13 +1,21 @@
 package com.victor.adasfeed
 
+import android.content.Context
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 
 data class Post(
     val userName: String,
@@ -34,8 +42,20 @@ private fun mockedPostList() = mutableListOf(
     Post(
         userName = "Marcela",
         description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
+        imagePost = R.drawable.stories1,
+        imageUser = R.drawable.user3,
+    ),
+    Post(
+        userName = "Marcela",
+        description = "Olhem meus doguinhos que fofos",
+        imagePost = R.drawable.stories4,
+        imageUser = R.drawable.user4,
+    ),
+    Post(
+        userName = "Marcela",
+        description = "Olhem meus doguinhos que fofos",
+        imagePost = R.drawable.stories3,
+        imageUser = R.drawable.user5,
     ),
     Post(
         userName = "Marcela",
@@ -60,26 +80,21 @@ private fun mockedPostList() = mutableListOf(
         description = "Olhem meus doguinhos que fofos",
         imagePost = R.drawable.feed2,
         imageUser = R.drawable.user2,
-    ), Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
     ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-
 )
 
-class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
+class PostAdapter(
+    private val postList: MutableList<Post> = mockedPostList()
+) :
     RecyclerView.Adapter<PostViewHolder>() {
+
+    var customSnackbarLayout: View? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val postView =
             LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
+
+        customSnackbarLayout =
+            LayoutInflater.from(parent.context).inflate(R.layout.snack_bar_layout, parent, false)
         return PostViewHolder(postView)
     }
 
@@ -94,6 +109,20 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         holder.imageLiked.setOnClickListener {
             holder.imageLiked.setImageResource(R.drawable.liked_fill)
         }
+
+        holder.imagePost.setOnLongClickListener {
+            removePostById(position, holder.itemView.rootView) { removedPost ->
+                addNewPost(removedPost, position)
+            }
+            true
+        }
+    }
+
+    private fun addNewPost(newPost: Post, index: Int) {
+        postList.add(index, newPost)
+        notifyItemInserted(index)
+        // perde performance pois recria a lista inteira
+        // o DiffUtilCallback é melhor
     }
 
     fun addNewPost(newPost: Post) {
@@ -101,6 +130,50 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         notifyItemInserted(postList.indexOf(newPost))
         // perde performance pois recria a lista inteira
         // o DiffUtilCallback é melhor
+    }
+
+    private fun removePostById(position: Int, parentView: View, undoRemove: (Post) -> Unit) {
+        val postToBeRemoved = postList[position]
+        val successRemoving = postList.remove(postToBeRemoved)
+
+        if (successRemoving) {
+            notifyItemRemoved(position)
+
+            val snackbar = Snackbar.make(
+                parentView,
+                "Post excluído!",
+                Snackbar.LENGTH_INDEFINITE
+            )
+
+            val snackbarLayout = snackbar.view as SnackbarLayout
+            snackbarLayout.setPadding(0)
+
+            val undoButton = customSnackbarLayout?.findViewById<Button>(R.id.buttonUndoRemove)
+
+            snackbarLayout.removeView(customSnackbarLayout)
+            snackbarLayout.addView(customSnackbarLayout, 0)
+            snackbar.show()
+
+            val timer = object : CountDownTimer(5000L, 10) {
+                val progressBar = customSnackbarLayout?.findViewById<ProgressBar>(R.id.progressHorizontalBar)
+                override fun onTick(millisUntilFinished: Long) {
+                    progressBar?.max = 5000
+                    progressBar?.progress = millisUntilFinished.toInt()
+                }
+
+                override fun onFinish() {
+                    progressBar?.progress = 0
+                    snackbar.dismiss()
+                }
+            }
+            timer.start()
+
+            undoButton?.setOnClickListener {
+                undoRemove(postToBeRemoved)
+                timer.cancel()
+                snackbar.dismiss()
+            }
+        }
     }
 
     fun setNewList(newList: List<Post>) {
