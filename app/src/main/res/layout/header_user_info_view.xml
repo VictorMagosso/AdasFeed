@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/textAppTitle">
@@ -16,16 +15,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textAppTitle"
-            android:text="Olá,"
-            android:textColor="#1a1a1a"
+            android:text="@string/greeting"
+            android:textColor="@color/gray"
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textName"
             style="@style/DefaultTextH1"
+            android:textColor="@color/gray"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Victor" />
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <TextView
@@ -36,8 +36,8 @@
         android:layout_alignBottom="@id/linearLayoutGreeting"
         android:layout_gravity="bottom"
         android:gravity="end"
-        android:text="\@victorprof"
-        android:textColor="#1E1E1E"
-        android:textSize="8dp"
+        android:textColor="@color/pink"
+        android:textSize="8sp"
         android:textStyle="bold" />
+
 </LinearLayout>

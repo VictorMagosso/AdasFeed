@@ -18,6 +18,7 @@
             style="@style/ToolbarAppTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/feed_margin_default"
             android:layout_alignParentEnd="true"
             android:text="@string/app_name" />
 
@@ -73,15 +74,10 @@
             android:id="@+id/buttonGoToProfile"
             style="@style/DefaultActionButton"
             android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/space_8dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_8dp"
             android:text="@string/go_to_profile_label" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/buttonRenderNewList"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="Carregar nova lista" />-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

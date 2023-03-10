@@ -18,7 +18,7 @@
     <style name="ToolbarAppTitle" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/kristi_regular</item>
         <item name="android:textSize">@dimen/toolbar_text_size</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/pink</item>
     </style>
 
     <style name="DefaultActionButton" parent="Widget.AppCompat.Button">

@@ -2,50 +2,41 @@ package com.victor.adasfeed
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.victor.adasfeed.passandodados.User
+import com.victor.adasfeed.passandodados.load
 
 class ProfileActivity : AppCompatActivity() {
-    // quebrar o codigo de proposito
-    // private val context = applicationContext.toString()
-
     private lateinit var textUserName: TextView
     private lateinit var textNickname: TextView
     private lateinit var buttonCall: Button
     private lateinit var imageUser: ImageView
+    private lateinit var fabSave: FloatingActionButton
+    private lateinit var backToHome: Button
+    private lateinit var userNameField: EditText
+    private lateinit var nickNameField: EditText
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        var uri = Uri.parse("")
         Log.d("contexto PA", applicationContext.toString())
         Log.d("ciclo de vida PA", "onCreate")
 
-        textUserName = findViewById(R.id.textUserName)
-        textNickname = findViewById(R.id.textNickname)
-        buttonCall = findViewById(R.id.buttonContact)
-        imageUser = findViewById(R.id.imageUser)
+        initViews()
+        setupButtons(uri)
 
         val extras = intent.extras
-        var uri = Uri.parse("")
-
-        // envia por intents - putExtra
-        // recebe por Bundle
         extras?.let { bundle ->
-            val user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                bundle.getParcelable(EXTRA_KEY, User::class.java)
-            } else {
-                bundle.getParcelable(EXTRA_KEY) as? User
-            }
-            // mais de um parametro na string
-//            textUserName.text = getString(R.string.profile_name, safeUser.userName, safeUser.userNickname)
-
+            user = load(EXTRA_KEY, bundle)
             user?.let { safeUser ->
                 textUserName.text = getString(R.string.profile_name, safeUser.userName)
                 textNickname.text = safeUser.userNickname
@@ -55,11 +46,39 @@ class ProfileActivity : AppCompatActivity() {
                 } ?: Uri.parse("tel:")
             }
         }
+    }
 
+    private fun initViews() {
+        textUserName = findViewById(R.id.textUserName)
+        textNickname = findViewById(R.id.textNickname)
+        buttonCall = findViewById(R.id.buttonContact)
+        imageUser = findViewById(R.id.imageUser)
+        fabSave = findViewById(R.id.fabSave)
+        backToHome = findViewById(R.id.buttonReturnToFeed)
+        userNameField = findViewById(R.id.editUserName)
+        nickNameField = findViewById(R.id.editNickaname)
+    }
+
+    private fun setupButtons(uri: Uri) {
         buttonCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
             finish()
+        }
+
+        fabSave.setOnClickListener {
+            val name = userNameField.text.toString()
+            val nickName = userNameField.text.toString()
+            textUserName.text = name
+            textNickname.text = nickName
+            user?.updateUser(name, nickName)
+        }
+
+        backToHome.setOnClickListener {
+            val intent = Intent(applicationContext, FeedActivity::class.java).apply {
+                putExtra(EXTRA_KEY, user)
+            }
+            startActivity(intent)
         }
     }
 
@@ -71,5 +90,14 @@ class ProfileActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("ciclo de vida PA", "onResume")
+    }
+
+    override fun onDestroy() {
+        val intent = Intent(applicationContext, FeedActivity::class.java).apply {
+            putExtra(EXTRA_KEY, user)
+        }
+        startActivity(intent)
+        super.onDestroy()
+        Log.d("ciclo de vida PA", "onDestroy")
     }
 }

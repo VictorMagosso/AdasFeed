@@ -5,4 +5,10 @@
     <string name="go_to_profile_label">Ir para tela de perfil</string>
 <!--    <string name="profile_name">Nome: %s - %s</string>-->
     <string name="profile_name">Nome: %s</string>
+    <string name="name">Nome:</string>
+    <string name="nickname">Nickname:</string>
+    <string name="back_to_feed">Voltar para o feed</string>
+    <string name="prefixe_nickname">\@---</string>
+    <string name="contact">Entrar em contato</string>
+    <string name="greeting">Olá,</string>
 </resources>
