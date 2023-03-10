@@ -35,7 +35,7 @@
     <dimen name="feed_margin_default">12.00dp</dimen>
     <dimen name="feed_stories_margin_top">18.00dp</dimen>
     <dimen name="feed_post_margin_top">20.00dp</dimen>
-    <dimen name="feed_default_button_width">145.00dp</dimen>
+    <dimen name="feed_default_button_width">160.00dp</dimen>
 
     <!-- Default button padding -->
     <dimen name="default_button_padding_start">9dp</dimen>
@@ -43,6 +43,9 @@
     <dimen name="default_button_padding_top">14dp</dimen>
     <dimen name="default_button_padding_bottom">14dp</dimen>
     <dimen name="default_button_min_height">54dp</dimen>
+
+    <!-- Contact button dimen -->
+    <dimen name="act_prof_contact_button_width">160.00dp</dimen>
 
     <dimen name="corner_radius8dp">8.00dp</dimen>
     <dimen name="corner_radiusStories">12.00dp</dimen>

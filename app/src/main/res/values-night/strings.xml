@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="new_post_label">Novo</string>
+    <string name="ReturnToFeed">Voltar para o feed</string>
+    <string name="call_to_user">Entrar em contato</string>
+    <string name="name_twodots">Nome:</string>
+    <string name="nickname_twodots">Nickname:</string>
+    <string name="enter_your_nickname">Enter your Nickname</string>
+    <string name="enter_your_user_name">Enter your User Name</string>
+    <string name="button_description_save_profile">The image shows a small diskette inside a circular button.</string>
 </resources>

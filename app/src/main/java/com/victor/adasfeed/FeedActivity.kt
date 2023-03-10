@@ -1,16 +1,19 @@
 package com.victor.adasfeed
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.adasfeed.FakePosts.makePostList
 import com.victor.adasfeed.passandodados.User
+import com.victor.adasfeed.passandodados.extractUser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,6 +30,9 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var headerView: View
+    private lateinit var tvUsername: TextView
+    private lateinit var tvNickname: TextView
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,24 +40,13 @@ class FeedActivity : AppCompatActivity() {
         Log.d("contexto no onCreate", applicationContext.toString())
         setContentView(R.layout.activity_feed)
 
-        val user = User(
-            userName = "Andrey Freitas",
-            userNickname = "@andreyfreitas",
-            imageUser = R.drawable.user1,
-            tel = "+55 (11) 123456789"
-        )
-
-        val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
-            putExtra(EXTRA_KEY, user)
-        }
-
         // inicializa views (findViewById())
         initViews()
         // monta os recyclerViews
         setupRecyclerViews()
         // criar os listeners
         setupClickListeners()
-        setupNavigationListeners(intent)
+        setupNavigationListeners()
 
         CoroutineScope(Dispatchers.Main).launch {
             renderButtonText()
@@ -81,9 +76,32 @@ class FeedActivity : AppCompatActivity() {
         rvStories = findViewById(R.id.rvStories)
         rvPosts = findViewById(R.id.rvPosts)
         buttonNewPost = findViewById(R.id.buttonNewPost)
-//        buttonRenderNewList = findViewById(R.id.buttonRenderNewList)
         buttonGoToProfile = findViewById(R.id.buttonGoToProfile)
         headerView = findViewById(R.id.headerView)
+        tvUsername = findViewById(R.id.textName)
+        tvNickname = findViewById(R.id.textNickname)
+
+        val extras = intent.extras
+        extras?.let { bundle ->
+            user = extractUser(EXTRA_KEY, bundle)
+
+            user?.let { safeUser ->
+                tvUsername.text = safeUser.userName
+                tvNickname.text = safeUser.userNickname
+            }
+        }
+
+        if (user == null) {
+            user = User(
+                userName = "Andrey Freitas",
+                userNickname = "@andreyfreitas",
+                imageUser = R.drawable.user1,
+                tel = "+55 (11) 123456789"
+            )
+            tvUsername.text = user!!.userName
+            tvNickname.text = user!!.userNickname
+        }
+
     }
 
     private fun setupRecyclerViews() {
@@ -120,12 +138,14 @@ class FeedActivity : AppCompatActivity() {
             )
         }
 
-        headerView.setOnClickListener {
-            startActivity(Intent(applicationContext, ProfileActivity::class.java))
-        }
     }
 
-    private fun setupNavigationListeners(intent: Intent) {
+    private fun setupNavigationListeners() {
+
+        val intent = Intent(applicationContext, ProfileActivity::class.java).apply {
+            putExtra(EXTRA_KEY, user)
+        }
+
         buttonGoToProfile.setOnClickListener {
             startActivity(intent)
         }

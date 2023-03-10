@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorOnPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
@@ -11,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="#000000"
-        android:textSize="@dimen/toolbar_text_size"
+        style="@style/ToolbarAppTitle"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +43,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:text="@string/profile_name"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnSecondary"
         android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageUser"
@@ -56,7 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:text="\@---"
-        android:textColor="#000000"
+        tools:text="\@nicknameTeste"
+        android:textColor="?attr/colorOnSecondary"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textUserName"
@@ -65,26 +67,35 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContact"
-        android:layout_width="wrap_content"
+        style="@style/CallButton"
+        android:drawableStart="@drawable/baseline_call_24"
+        android:layout_width="@dimen/act_prof_contact_button_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Entrar em contato"
+        android:text="@string/call_to_user"
         app:layout_constraintEnd_toEndOf="@+id/textNickname"
         app:layout_constraintStart_toStartOf="@+id/textNickname"
-        app:layout_constraintTop_toBottomOf="@+id/textNickname" />
+        app:layout_constraintTop_toBottomOf="@+id/textNickname"
+        />
 
     <TextView
         android:id="@+id/textUserNameLabel"
+        android:textColor="?attr/colorOnSecondary"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="20dp"
-        android:text="Nome:"
+        android:text="@string/name_twodots"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonContact" />
 
     <EditText
+        android:inputType="text"
         android:id="@+id/editUserName"
+        android:background="@drawable/background_edit_text"
+        android:labelFor="@+id/textUserName"
+        android:hint="@string/enter_your_user_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
@@ -94,15 +105,20 @@
 
     <TextView
         android:id="@+id/textNicknameLabel"
-        android:layout_width="wrap_content"
+        android:textColor="?attr/colorOnSecondary"        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Nickname:"
+        android:text="@string/nickname_twodots"
         app:layout_constraintStart_toStartOf="@+id/textUserNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/editUserName" />
 
     <EditText
-        android:id="@+id/editNickaname"
+        android:inputType="text"
+        android:textStyle="bold"
+        android:id="@+id/editNickname"
+        android:background="@drawable/background_edit_text"
+        android:labelFor="@+id/textNickname"
+        android:hint="@string/enter_your_nickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/editUserName"
@@ -115,21 +131,25 @@
     <!--        android:src="@drawable/ic_save_profile" />-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReturnToFeed"
-        android:layout_width="wrap_content"
+        style="@style/DefaultActionButton"
+        android:layout_width="@dimen/feed_default_button_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Voltar para o feed"
+        android:layout_marginEnd="@dimen/space_8dp"
+        android:text="@string/ReturnToFeed"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editNickaname" />
+        app:layout_constraintStart_toStartOf="@+id/editNickname" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonSaveProfile"
+        android:contentDescription="@string/button_description_save_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_save_profile"
         app:backgroundTint="#3EAAFF"
         app:backgroundTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="@+id/buttonReturnToFeed"
-        app:layout_constraintEnd_toEndOf="@+id/editNickaname"
+        app:layout_constraintEnd_toEndOf="@+id/editNickname"
         app:layout_constraintTop_toTopOf="@+id/buttonReturnToFeed"
         app:rippleColor="@android:color/holo_orange_dark" />
     <!--    <androidx.fragment.app.FragmentContainerView-->

@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textAppTitle"
-            android:text="Olá,"
-            android:textColor="#1a1a1a"
+            android:text="@string/portuguese_greeting"
+            android:textColor="?attr/colorOnSecondary"
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -25,7 +25,8 @@
             style="@style/DefaultTextH1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Victor" />
+            android:text="@string/percent_s"
+            />
     </LinearLayout>
 
     <TextView
@@ -36,8 +37,8 @@
         android:layout_alignBottom="@id/linearLayoutGreeting"
         android:layout_gravity="bottom"
         android:gravity="end"
-        android:text="\@victorprof"
-        android:textColor="#1E1E1E"
-        android:textSize="8dp"
+        android:text="@string/percent_s"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="8sp"
         android:textStyle="bold" />
 </LinearLayout>
