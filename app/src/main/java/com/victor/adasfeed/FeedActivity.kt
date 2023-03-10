@@ -127,14 +127,8 @@ class FeedActivity : AppCompatActivity() {
 //            postAdapter.setNewList(newPostList)
 //        }
         buttonNewPost.setOnClickListener {
-            postAdapter.addNewPost(
-                Post(
-                    userName = "Esse é novo",
-                    description = "Estou sendo adicionado do feed activity 2",
-                    imageUser = R.drawable.user4,
-                    imagePost = R.drawable.stories2
-                )
-            )
+            packageManager.getLaunchIntentForPackage("com.victormagosso.walllet")
+                ?.let { startActivity(it) }
         }
     }
 
