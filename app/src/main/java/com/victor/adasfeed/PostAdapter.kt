@@ -34,7 +34,9 @@ private val uniquePosts = listOf(
     )
 )
 
-private fun mockedPostList() = MutableList(50) { uniquePosts[it % uniquePosts.size] }
+private const val MOCKED_LIST_SIZE = 20
+
+private fun mockedPostList() = MutableList(MOCKED_LIST_SIZE) { uniquePosts[it % uniquePosts.size].copy() }
 
 class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
     RecyclerView.Adapter<PostViewHolder>() {
