@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.android.material.snackbar.Snackbar
 
 data class Post(
     val userName: String,
@@ -15,68 +16,30 @@ data class Post(
     val imagePost: Int,
     val imageUser: Int,
     val isLiked: Boolean = false,
-    val isFavorite: Boolean = false,
+    val isFavorite: Boolean = false
 )
 
-private fun mockedPostList() = mutableListOf(
+private val uniquePosts = listOf(
     Post(
         userName = "Jonas do Dark",
         description = "Hoje foi dia de muita gravação !!!",
         imagePost = R.drawable.feed1,
-        imageUser = R.drawable.user1,
+        imageUser = R.drawable.user1
     ),
     Post(
         userName = "Marcela",
         description = "Olhem meus doguinhos que fofos",
         imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ), Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-    Post(
-        userName = "Marcela",
-        description = "Olhem meus doguinhos que fofos",
-        imagePost = R.drawable.feed2,
-        imageUser = R.drawable.user2,
-    ),
-
+        imageUser = R.drawable.user2
+    )
 )
+
+private fun mockedPostList() = MutableList(50) { uniquePosts[it % uniquePosts.size] }
 
 class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
     RecyclerView.Adapter<PostViewHolder>() {
+
+    private lateinit var mRecyclerView: RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val postView =
             LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
@@ -84,6 +47,12 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
     }
 
     override fun getItemCount() = postList.size
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+
+        mRecyclerView = recyclerView
+    }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.textUserName.text = postList[position].userName
@@ -94,6 +63,24 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         holder.imageLiked.setOnClickListener {
             holder.imageLiked.setImageResource(R.drawable.liked_fill)
         }
+
+        holder.rootView.setOnLongClickListener {
+            val holdedPost = holdPostForDeletion(position)
+            Snackbar.make(it, R.string.toast_message_post_removed, Snackbar.LENGTH_LONG).setAction(
+                R.string.toast_action_post_removed,
+                View.OnClickListener {
+                    addPostToPosition(holdedPost.first, holdedPost.second)
+                    mRecyclerView.scrollToPosition(holdedPost.second)
+                }
+            ).show()
+            true
+        }
+    }
+
+    fun addPostToPosition(post: Post, position: Int) {
+        postList.add(position, post)
+        notifyItemInserted(postList.indexOf(post))
+        notifyItemRangeChanged(position, postList.size)
     }
 
     fun addNewPost(newPost: Post) {
@@ -101,6 +88,18 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         notifyItemInserted(postList.indexOf(newPost))
         // perde performance pois recria a lista inteira
         // o DiffUtilCallback é melhor
+    }
+
+    fun holdPostForDeletion(postPosition: Int): Pair<Post, Int> {
+        val savedPost = postList.elementAt(postPosition)
+        removePost(postPosition)
+        return savedPost to postPosition
+    }
+
+    fun removePost(postPosition: Int) {
+        postList.removeAt(postPosition)
+        notifyItemRemoved(postPosition)
+        notifyItemRangeChanged(postPosition, postList.size)
     }
 
     fun setNewList(newList: List<Post>) {
@@ -115,7 +114,7 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
 
 class PostDiffUtilCallback(
     private val oldPostList: List<Post>,
-    private val newPostList: List<Post>,
+    private val newPostList: List<Post>
 ) : DiffUtil.Callback() {
     override fun getOldListSize() = oldPostList.size
 
@@ -137,6 +136,7 @@ class PostDiffUtilCallback(
 }
 
 class PostViewHolder(view: View) : ViewHolder(view) {
+    val rootView: View
     val textUserName: TextView
     val textPostDescription: TextView
     val imageUser: ImageView
@@ -145,6 +145,7 @@ class PostViewHolder(view: View) : ViewHolder(view) {
     val imageFavorite: ImageView
 
     init {
+        rootView = view
         textUserName = view.findViewById(R.id.textUserName)
         textPostDescription = view.findViewById(R.id.textPostDescription)
         imageUser = view.findViewById(R.id.imageUser)
