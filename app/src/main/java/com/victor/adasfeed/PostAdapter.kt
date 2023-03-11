@@ -58,51 +58,57 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.textUserName.text = postList[position].userName
-        holder.textPostDescription.text = postList[position].description
-        holder.imagePost.setImageResource(postList[position].imagePost)
-        holder.imageUser.setImageResource(postList[position].imageUser)
-        holder.imageLiked.setImageResource(getLikeButtonResource(postList[position].isLiked))
+        with(postList[position]) {
+            val post = this
+            holder.apply {
+                textUserName.text = post.userName
+                textPostDescription.text = post.description
+                imagePost.setImageResource(post.imagePost)
+                imageUser.setImageResource(post.imageUser)
+                imageLiked.setImageResource(getLikeButtonResource(post.isLiked))
 
-        holder.imageLiked.setOnClickListener {
-            val likeState = getLikeButtonResource(toggleLikeAndReturn(position))
-            holder.imageLiked.setImageResource(likeState)
-            Toast.makeText(
-                it.context,
-                getLikedPosts().joinToString(
-                    transform = { post -> "${post.userName} + ${post.isLiked}" },
-                    separator = " "
-                ),
-                Toast.LENGTH_LONG
-            ).show()
-        }
-
-        holder.rootView.setOnLongClickListener {
-            val holdedPost = holdPostForDeletion(position)
-            Snackbar.make(it, R.string.toast_message_post_removed, Snackbar.LENGTH_LONG).setAction(
-                R.string.toast_action_post_removed,
-                View.OnClickListener {
-                    addPostToPosition(holdedPost.first, holdedPost.second)
-                    mRecyclerView.scrollToPosition(holdedPost.second)
+                imageLiked.setOnClickListener {
+                    val likeState = getLikeButtonResource(toggleLikeAndReturn(position))
+                    imageLiked.setImageResource(likeState)
+                    Toast.makeText(
+                        it.context,
+                        getLikedPosts().joinToString(
+                            transform = { post -> "${post.userName} + ${post.isLiked}" },
+                            separator = " "
+                        ),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-            ).show()
-            true
+
+                rootView.setOnLongClickListener {
+                    val holdedPost = holdPostForDeletion(position)
+
+                    Snackbar.make(it, R.string.toast_message_post_removed, Snackbar.LENGTH_LONG)
+                        .setAction(
+                            R.string.toast_action_post_removed,
+                            View.OnClickListener {
+                                addPostToPosition(holdedPost.first, holdedPost.second)
+                                mRecyclerView.scrollToPosition(holdedPost.second)
+                            }
+                        ).show()
+                    true
+                }
+            }
         }
     }
 
-    fun getLikeButtonResource(isLiked: Boolean): Int {
-        return if (isLiked) {
-            R.drawable.liked_fill
-        } else {
-            R.drawable.liked1
+    private fun getLikeButtonResource(isLiked: Boolean): Int {
+        return when {
+            isLiked -> R.drawable.liked_fill
+            else -> R.drawable.liked1
         }
     }
 
-    fun getLikedPosts(): List<Post> {
+    private fun getLikedPosts(): List<Post> {
         return postList.filter { it.isLiked }
     }
 
-    fun addPostToPosition(post: Post, position: Int) {
+    private fun addPostToPosition(post: Post, position: Int) {
         postList.add(position, post)
         notifyItemInserted(postList.indexOf(post))
         notifyItemRangeChanged(position, postList.size)
@@ -115,19 +121,19 @@ class PostAdapter(private val postList: MutableList<Post> = mockedPostList()) :
         // o DiffUtilCallback é melhor
     }
 
-    fun holdPostForDeletion(postPosition: Int): Pair<Post, Int> {
+    private fun holdPostForDeletion(postPosition: Int): Pair<Post, Int> {
         val savedPost = postList.elementAt(postPosition)
         removePost(postPosition)
         return savedPost to postPosition
     }
 
-    fun removePost(postPosition: Int) {
+    private fun removePost(postPosition: Int) {
         postList.removeAt(postPosition)
         notifyItemRemoved(postPosition)
         notifyItemRangeChanged(postPosition, postList.size)
     }
 
-    fun toggleLikeAndReturn(likedPostPosition: Int): Boolean {
+    private fun toggleLikeAndReturn(likedPostPosition: Int): Boolean {
         val post = postList.elementAt(likedPostPosition)
         post.apply { isLiked = !isLiked }
         return post.isLiked
