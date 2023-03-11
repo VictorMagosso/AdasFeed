@@ -15,6 +15,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import android.window.OnBackInvokedCallback
+import android.window.OnBackInvokedDispatcher
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.victor.adasfeed.passandodados.User
@@ -23,7 +25,7 @@ import com.victor.adasfeed.utils.ExtraKeys.EXTRA_KEY
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(),OnBackInvokedDispatcher {
     // quebrar o codigo de proposito
     // private val context = applicationContext.toString()
 
@@ -198,6 +200,16 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+        Toast.makeText(applicationContext, "Cliquei no onBackPressed", Toast.LENGTH_SHORT).show()
+    }
+
+//    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+//        Toast.makeText(applicationContext, "Cliquei no onBackPressed", Toast.LENGTH_SHORT).show()
+//        return super.getOnBackInvokedDispatcher()
+//    }
+
     override fun onStart() {
         super.onStart()
         Log.d("ciclo de vida PA", "onStart")
@@ -206,5 +218,13 @@ class ProfileActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("ciclo de vida PA", "onResume")
+    }
+
+    override fun registerOnBackInvokedCallback(p0: Int, p1: OnBackInvokedCallback) {
+//        Toast.makeText(applicationContext, "Cliquei no onBackPressed", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun unregisterOnBackInvokedCallback(p0: OnBackInvokedCallback) {
+//        TODO("Not yet implemented")
     }
 }
