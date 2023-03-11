@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Ada\'s Feed</string>
-
-    <string name="new_post_label">Novo post</string>
     <string name="go_to_profile_label">Ir para tela de perfil</string>
-<!--    <string name="profile_name">Nome: %s - %s</string>-->
+    <string name="new_post_label">Novo post</string>
     <string name="profile_name">Nome: %s</string>
+    <string name="toast_action_post_removed">Desfazer</string>
+    <string name="toast_message_post_removed">Post removido</string>
 </resources>
