@@ -1,5 +1,6 @@
 package com.victor.adasfeed
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -10,27 +11,28 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
+import com.victor.adasfeed.databinding.ActivityMainBinding
+import com.victor.adasfeed.databinding.ActivityProfileBinding
 import com.victor.adasfeed.passandodados.User
 
 class ProfileActivity : AppCompatActivity() {
     // quebrar o codigo de proposito
     // private val context = applicationContext.toString()
+    private lateinit var binding: ActivityProfileBinding
+    private var name: String = ""
+    private var nickname: String = ""
+    private lateinit var userIntent: User
 
-    private lateinit var textUserName: TextView
-    private lateinit var textNickname: TextView
-    private lateinit var buttonCall: Button
-    private lateinit var imageUser: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         Log.d("contexto PA", applicationContext.toString())
         Log.d("ciclo de vida PA", "onCreate")
-
-        textUserName = findViewById(R.id.textUserName)
-        textNickname = findViewById(R.id.textNickname)
-        buttonCall = findViewById(R.id.buttonContact)
-        imageUser = findViewById(R.id.imageUser)
 
         val extras = intent.extras
         var uri = Uri.parse("")
@@ -47,20 +49,46 @@ class ProfileActivity : AppCompatActivity() {
 //            textUserName.text = getString(R.string.profile_name, safeUser.userName, safeUser.userNickname)
 
             user?.let { safeUser ->
-                textUserName.text = getString(R.string.profile_name, safeUser.userName)
-                textNickname.text = safeUser.userNickname
-                imageUser.setImageResource(safeUser.imageUser)
+                userIntent = safeUser
+                name = safeUser.userName
+                nickname = safeUser.userNickname
+                with(binding) {
+                    textUserName.text = safeUser.userName
+                    textNickname.text = safeUser.userNickname
+                    imageUser.setImageResource(safeUser.imageUser)
+                }
                 uri = safeUser.tel?.let {
                     Uri.parse("tel:${safeUser.tel}")
                 } ?: Uri.parse("tel:")
             }
         }
 
-        buttonCall.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL, uri)
-            startActivity(intent)
-            finish()
+        with(binding) {
+            buttonContact.setOnClickListener {
+                val intent = Intent(Intent.ACTION_DIAL, uri)
+                startActivity(intent)
+                finish()
+            }
+            editUserName.doAfterTextChanged {
+                name = it.toString()
+            }
+            editNickname.doAfterTextChanged {
+                nickname = it.toString()
+            }
+            saveButton.setOnClickListener {
+                textUserName.text = name
+                textNickname.text = nickname
+            }
+            buttonReturnToFeed.setOnClickListener {
+                val intent = Intent().apply {
+                    putExtra(EXTRA_KEY, userIntent.copy(userName = name, userNickname = nickname))
+                }
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            }
         }
+
+
     }
 
     override fun onStart() {
