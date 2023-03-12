@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editUserName" />
 
     <EditText
-        android:id="@+id/editNickaname"
+        android:id="@+id/editNickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/editUserName"
@@ -120,7 +120,7 @@
         android:layout_marginBottom="12dp"
         android:text="Voltar para o feed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editNickaname" />
+        app:layout_constraintStart_toStartOf="@+id/editNickname" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -129,7 +129,7 @@
         app:backgroundTint="#3EAAFF"
         app:backgroundTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="@+id/buttonReturnToFeed"
-        app:layout_constraintEnd_toEndOf="@+id/editNickaname"
+        app:layout_constraintEnd_toEndOf="@+id/editNickname"
         app:layout_constraintTop_toTopOf="@+id/buttonReturnToFeed"
         app:rippleColor="@android:color/holo_orange_dark" />
     <!--    <androidx.fragment.app.FragmentContainerView-->

@@ -10,27 +10,23 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import com.victor.adasfeed.databinding.ActivityMainBinding
+import com.victor.adasfeed.databinding.ActivityProfileBinding
 import com.victor.adasfeed.passandodados.User
 
 class ProfileActivity : AppCompatActivity() {
     // quebrar o codigo de proposito
     // private val context = applicationContext.toString()
+    private lateinit var binding: ActivityProfileBinding
 
-    private lateinit var textUserName: TextView
-    private lateinit var textNickname: TextView
-    private lateinit var buttonCall: Button
-    private lateinit var imageUser: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         Log.d("contexto PA", applicationContext.toString())
         Log.d("ciclo de vida PA", "onCreate")
-
-        textUserName = findViewById(R.id.textUserName)
-        textNickname = findViewById(R.id.textNickname)
-        buttonCall = findViewById(R.id.buttonContact)
-        imageUser = findViewById(R.id.imageUser)
 
         val extras = intent.extras
         var uri = Uri.parse("")
@@ -47,16 +43,18 @@ class ProfileActivity : AppCompatActivity() {
 //            textUserName.text = getString(R.string.profile_name, safeUser.userName, safeUser.userNickname)
 
             user?.let { safeUser ->
-                textUserName.text = getString(R.string.profile_name, safeUser.userName)
-                textNickname.text = safeUser.userNickname
-                imageUser.setImageResource(safeUser.imageUser)
+                with(binding) {
+                    textUserName.text = getString(R.string.profile_name, safeUser.userName)
+                    textNickname.text = safeUser.userNickname
+                    imageUser.setImageResource(safeUser.imageUser)
+                }
                 uri = safeUser.tel?.let {
                     Uri.parse("tel:${safeUser.tel}")
                 } ?: Uri.parse("tel:")
             }
         }
 
-        buttonCall.setOnClickListener {
+        binding.buttonContact.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL, uri)
             startActivity(intent)
             finish()
